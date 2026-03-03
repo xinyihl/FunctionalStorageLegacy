@@ -2,22 +2,19 @@ package com.xinyihl.functionalstoragelgeacy.block.tile;
 
 import com.xinyihl.functionalstoragelgeacy.FunctionalStorageLgeacy;
 import com.xinyihl.functionalstoragelgeacy.block.DrawerBlock;
-import com.xinyihl.functionalstoragelgeacy.config.FunctionalStorageConfig;
 import com.xinyihl.functionalstoragelgeacy.item.ConfigurationToolItem;
 import com.xinyihl.functionalstoragelgeacy.item.StorageUpgradeItem;
 import com.xinyihl.functionalstoragelgeacy.item.UpgradeItem;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.common.util.Constants;
+import net.minecraft.world.World;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
@@ -268,8 +265,7 @@ public abstract class ControllableDrawerTile extends TileEntity implements ITick
         }
 
         storageMultiplier = mult;
-        isLocked = world != null && world.getBlockState(pos).getBlock() instanceof DrawerBlock
-                && world.getBlockState(pos).getValue(DrawerBlock.LOCKED);
+        isLocked = world != null && world.getBlockState(pos).getBlock() instanceof DrawerBlock && world.getBlockState(pos).getValue(DrawerBlock.LOCKED);
         needsUpgradeCache = false;
     }
 
@@ -298,6 +294,11 @@ public abstract class ControllableDrawerTile extends TileEntity implements ITick
             world.setBlockState(pos, world.getBlockState(pos).withProperty(DrawerBlock.LOCKED, locked), 3);
             needsUpgradeCache = true;
         }
+    }
+
+    @Override
+    public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newSate) {
+        return oldState.getBlock() != newSate.getBlock();
     }
 
     public void toggleLocking() {
