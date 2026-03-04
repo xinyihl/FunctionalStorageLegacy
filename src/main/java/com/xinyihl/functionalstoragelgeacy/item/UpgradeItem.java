@@ -9,6 +9,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EntitySelectors;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -203,7 +204,7 @@ public class UpgradeItem extends Item {
 
         // Use exact block AABB for collection area (matches 1.21 behavior)
         AxisAlignedBB collectArea = new AxisAlignedBB(collectPos);
-        List<EntityItem> items = world.getEntitiesWithinAABB(EntityItem.class, collectArea);
+        List<EntityItem> items = world.getEntitiesWithinAABB(EntityItem.class, collectArea, EntitySelectors.IS_ALIVE);
         for (EntityItem entity : items) {
             if (entity.isDead) continue;
             ItemStack entityStack = entity.getItem();

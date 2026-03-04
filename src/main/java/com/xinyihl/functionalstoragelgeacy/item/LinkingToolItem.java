@@ -26,6 +26,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -248,7 +249,7 @@ public class LinkingToolItem extends Item {
                         + controllerPos.getX() + ", " + controllerPos.getY() + ", " + controllerPos.getZ());
             }
             tooltip.add("");
-            tooltip.add(TextFormatting.GRAY + new TextComponentTranslation("linkingtool.use").getUnformattedText());
+            tooltip.addAll(Arrays.asList(new TextComponentTranslation("linkingtool.use").getUnformattedText().split("\\\\n")));
         }
     }
 

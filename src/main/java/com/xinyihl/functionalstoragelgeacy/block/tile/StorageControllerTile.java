@@ -305,4 +305,14 @@ public class StorageControllerTile extends ControllableDrawerTile {
         markDirty();
         sendUpdatePacket();
     }
+
+    @Override
+    public AxisAlignedBB getRenderBoundingBox() {
+        return TileEntity.INFINITE_EXTENT_AABB;
+    }
+
+    @Override
+    public double getMaxRenderDistanceSquared() {
+        return Float.POSITIVE_INFINITY;
+    }
 }

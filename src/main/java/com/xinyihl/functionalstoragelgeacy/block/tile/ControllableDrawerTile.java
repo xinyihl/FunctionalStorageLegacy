@@ -250,7 +250,7 @@ public abstract class ControllableDrawerTile extends TileEntity implements ITick
             ItemStack stack = storageUpgrades.getStackInSlot(i);
             if (stack.getItem() instanceof StorageUpgradeItem) {
                 StorageUpgradeItem upgrade = (StorageUpgradeItem) stack.getItem();
-                mult = Math.max(mult, upgrade.getTier().getMultiplier());
+                mult += upgrade.getTier().getMultiplier();
             }
             if (stack.getItem() == FunctionalStorageLgeacy.CREATIVE_VENDING_UPGRADE) {
                 isCreative = true;
