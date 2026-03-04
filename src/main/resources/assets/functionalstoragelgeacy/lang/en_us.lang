@@ -54,6 +54,15 @@ item.functionalstoragelgeacy.linking_tool.name=Linking Tool
 # Tooltips
 item.functionalstoragelgeacy.iron_downgrade.desc=Reduces drawer storage capacity
 item.functionalstoragelgeacy.storage_upgrade.multiplier=Storage Multiplier: %s
+item.functionalstoragelgeacy.upgrade.direction=Direction:
+item.functionalstoragelgeacy.upgrade.direction.use=Sneak + right-click to cycle direction.
+item.functionalstoragelgeacy.upgrade.direction.swapped=Direction changed to %s
+item.functionalstoragelgeacy.upgrade.direction.down=Down
+item.functionalstoragelgeacy.upgrade.direction.up=Up
+item.functionalstoragelgeacy.upgrade.direction.north=North
+item.functionalstoragelgeacy.upgrade.direction.south=South
+item.functionalstoragelgeacy.upgrade.direction.west=West
+item.functionalstoragelgeacy.upgrade.direction.east=East
 
 # Linking Tool Messages
 linkingtool.controller.configured=Controller position saved!

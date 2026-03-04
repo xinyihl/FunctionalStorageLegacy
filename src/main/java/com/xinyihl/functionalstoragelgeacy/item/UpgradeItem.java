@@ -4,19 +4,28 @@ import com.xinyihl.functionalstoragelgeacy.FunctionalStorageLgeacy;
 import com.xinyihl.functionalstoragelgeacy.block.tile.ControllableDrawerTile;
 import com.xinyihl.functionalstoragelgeacy.block.tile.FluidDrawerTile;
 import com.xinyihl.functionalstoragelgeacy.config.FunctionalStorageConfig;
+import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.EntitySelectors;
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
@@ -66,6 +75,12 @@ public class UpgradeItem extends Item {
         return utilityAction;
     }
 
+    public boolean isDirectionalUtility() {
+        return type == Type.UTILITY && (utilityAction == UtilityAction.PULLING
+                || utilityAction == UtilityAction.PUSHING
+                || utilityAction == UtilityAction.COLLECTOR);
+    }
+
     /**
      * Get the direction stored on this upgrade's NBT tag.
      */
@@ -82,6 +97,42 @@ public class UpgradeItem extends Item {
     public static void setDirection(ItemStack stack, EnumFacing facing) {
         if (!stack.hasTagCompound()) stack.setTagCompound(new NBTTagCompound());
         stack.getTagCompound().setInteger("Direction", facing.getIndex());
+    }
+
+    @Override
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+        ItemStack stack = playerIn.getHeldItem(handIn);
+        if (isDirectionalUtility() && playerIn.isSneaking()) {
+            EnumFacing current = getDirection(stack);
+            EnumFacing next = EnumFacing.byIndex((current.getIndex() + 1) % EnumFacing.values().length);
+            setDirection(stack, next);
+
+            if (!worldIn.isRemote) {
+                playerIn.sendStatusMessage(new TextComponentTranslation(
+                        "item.functionalstoragelgeacy.upgrade.direction.swapped",
+                        new TextComponentTranslation("item.functionalstoragelgeacy.upgrade.direction." + next.getName())
+                ).setStyle(new net.minecraft.util.text.Style().setColor(TextFormatting.GREEN)), true);
+            }
+
+            return new ActionResult<>(EnumActionResult.SUCCESS, stack);
+        }
+
+        return super.onItemRightClick(worldIn, playerIn, handIn);
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+        super.addInformation(stack, worldIn, tooltip, flagIn);
+        if (isDirectionalUtility()) {
+            EnumFacing direction = getDirection(stack);
+            tooltip.add(TextFormatting.YELLOW
+                    + new TextComponentTranslation("item.functionalstoragelgeacy.upgrade.direction").getUnformattedText()
+                    + " " + TextFormatting.AQUA
+                    + new TextComponentTranslation("item.functionalstoragelgeacy.upgrade.direction." + direction.getName()).getUnformattedText());
+            tooltip.add(TextFormatting.GRAY
+                    + new TextComponentTranslation("item.functionalstoragelgeacy.upgrade.direction.use").getUnformattedText());
+        }
     }
 
     /**
