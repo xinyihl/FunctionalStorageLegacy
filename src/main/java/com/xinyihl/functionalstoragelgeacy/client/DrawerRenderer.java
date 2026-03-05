@@ -48,10 +48,7 @@ public class DrawerRenderer extends TileEntitySpecialRenderer<ControllableDrawer
         if (te == null || te.getWorld() == null) return;
 
         // Distance check using client config render range
-        double distSq = te.getDistanceSq(
-                Minecraft.getMinecraft().player.posX,
-                Minecraft.getMinecraft().player.posY,
-                Minecraft.getMinecraft().player.posZ);
+        double distSq = te.getDistanceSq(Minecraft.getMinecraft().player.posX, Minecraft.getMinecraft().player.posY, Minecraft.getMinecraft().player.posZ);
         double renderRange = FunctionalStorageClientConfig.DRAWER_RENDER_RANGE;
         if (distSq > renderRange * renderRange) return;
 
@@ -122,10 +119,10 @@ public class DrawerRenderer extends TileEntitySpecialRenderer<ControllableDrawer
                 renderItemSlot(bigHandler, 1, 0.5F, 0.27F, 0.5F, showRender, showCount, 0.2F, options);
                 break;
             case X_4:
-                renderItemSlot(bigHandler, 0, 0.75F, 0.77F, 0.5F, showRender, showCount, 0.2F, options);
-                renderItemSlot(bigHandler, 1, 0.25F, 0.77F, 0.5F, showRender, showCount, 0.2F, options);
-                renderItemSlot(bigHandler, 2, 0.75F, 0.27F, 0.5F, showRender, showCount, 0.2F, options);
-                renderItemSlot(bigHandler, 3, 0.25F, 0.27F, 0.5F, showRender, showCount, 0.2F, options);
+                renderItemSlot(bigHandler, 0, 0.25F, 0.77F, 0.5F, showRender, showCount, 0.2F, options);
+                renderItemSlot(bigHandler, 1, 0.75F, 0.77F, 0.5F, showRender, showCount, 0.2F, options);
+                renderItemSlot(bigHandler, 2, 0.25F, 0.27F, 0.5F, showRender, showCount, 0.2F, options);
+                renderItemSlot(bigHandler, 3, 0.75F, 0.27F, 0.5F, showRender, showCount, 0.2F, options);
                 break;
         }
     }
@@ -169,10 +166,10 @@ public class DrawerRenderer extends TileEntitySpecialRenderer<ControllableDrawer
         boolean showRender = options == null || options.isShowItemRender();
         boolean showCount = options == null || options.isShowItemCount();
 
-        // 3 slots: 0 = bottom-right, 1 = bottom-left, 2 = top-center
-        renderCompactSlot(handler, 0, 0.75F, 0.27F, showRender, showCount, options);
+        // 3 slots: 0 = top-center, 1 = bottom-left, 2 = bottom-right
+        renderCompactSlot(handler, 0, 0.5F, 0.77F, showRender, showCount, options);
         renderCompactSlot(handler, 1, 0.25F, 0.27F, showRender, showCount, options);
-        renderCompactSlot(handler, 2, 0.5F, 0.77F, showRender, showCount, options);
+        renderCompactSlot(handler, 2, 0.75F, 0.27F, showRender, showCount, options);
     }
 
     private void renderCompactSlot(CompactingInventoryHandler handler, int slot, float posX, float posY, boolean showRender, boolean showCount, ControllableDrawerTile.DrawerOptions options) {
@@ -228,22 +225,25 @@ public class DrawerRenderer extends TileEntitySpecialRenderer<ControllableDrawer
 
         switch (drawerType) {
             case X_1:
-                renderSingleFluidSlot(handler, 0, 0.5F, 0.5F, 1.0F, showRender, showCount, 0.3F, options);
+                renderSingleFluidSlot(handler, 0, 0.5F, 0.5F, 1.0F, 0.35F, 0.35F, showRender, showCount, 0.3F, options);
                 break;
             case X_2:
-                renderSingleFluidSlot(handler, 0, 0.5F, 0.77F, 0.5F, showRender, showCount, 0.2F, options);
-                renderSingleFluidSlot(handler, 1, 0.5F, 0.27F, 0.5F, showRender, showCount, 0.2F, options);
+                renderSingleFluidSlot(handler, 0, 0.49F, 0.77F, 0.5F, 0.80F, 0.30F, showRender, showCount, 0.2F, options);
+                renderSingleFluidSlot(handler, 1, 0.49F, 0.27F, 0.5F, 0.80F, 0.30F, showRender, showCount, 0.2F, options);
                 break;
             case X_4:
-                renderSingleFluidSlot(handler, 0, 0.75F, 0.77F, 0.5F, showRender, showCount, 0.2F, options);
-                renderSingleFluidSlot(handler, 1, 0.25F, 0.77F, 0.5F, showRender, showCount, 0.2F, options);
-                renderSingleFluidSlot(handler, 2, 0.75F, 0.27F, 0.5F, showRender, showCount, 0.2F, options);
-                renderSingleFluidSlot(handler, 3, 0.25F, 0.27F, 0.5F, showRender, showCount, 0.2F, options);
+                renderSingleFluidSlot(handler, 0, 0.25F, 0.77F, 0.5F, 0.35F, 0.35F, showRender, showCount, 0.2F, options);
+                renderSingleFluidSlot(handler, 1, 0.75F, 0.77F, 0.5F, 0.35F, 0.35F, showRender, showCount, 0.2F, options);
+                renderSingleFluidSlot(handler, 2, 0.25F, 0.27F, 0.5F, 0.35F, 0.35F, showRender, showCount, 0.2F, options);
+                renderSingleFluidSlot(handler, 3, 0.75F, 0.27F, 0.5F, 0.35F, 0.35F, showRender, showCount, 0.2F, options);
                 break;
         }
     }
 
-    private void renderSingleFluidSlot(BigFluidHandler handler, int slot, float posX, float posY, float slotScale, boolean showRender, boolean showCount, float textScale, ControllableDrawerTile.DrawerOptions options) {
+    private void renderSingleFluidSlot(BigFluidHandler handler, int slot, float posX, float posY, float slotScale,
+                                       float fluidHalfWidth, float fluidHalfHeight,
+                                       boolean showRender, boolean showCount, float textScale,
+                                       ControllableDrawerTile.DrawerOptions options) {
         if (slot >= handler.getTanksCount()) return;
         FluidStack fluid = handler.getTankFluid(slot);
         if (fluid == null || fluid.amount <= 0) return;
@@ -252,7 +252,7 @@ public class DrawerRenderer extends TileEntitySpecialRenderer<ControllableDrawer
         float progress = maxAmount > 0 ? Math.min(1.0f, fluid.amount / (float) maxAmount) : 0;
         renderIndicatorOnFace(posX, posY, slotScale, progress, options, Z_OFFSET_INDICATOR);
         if (showRender) {
-            renderFluidOnFace(fluid, posX, posY, slotScale, Z_OFFSET_FLUID);
+            renderFluidOnFace(fluid, posX, posY, slotScale, Z_OFFSET_FLUID, fluidHalfWidth, fluidHalfHeight);
         }
         if (showCount) {
             renderCountOnFace(fluid.amount, posX, posY, slotScale, textScale, Z_OFFSET_COUNT);
@@ -343,7 +343,8 @@ public class DrawerRenderer extends TileEntitySpecialRenderer<ControllableDrawer
     // ============================================================
     // Core rendering: fluid icon on face
     // ============================================================
-    private void renderFluidOnFace(FluidStack fluid, float posX, float posY, float slotScale, float zOffset) {
+    private void renderFluidOnFace(FluidStack fluid, float posX, float posY, float slotScale, float zOffset,
+                                   float halfWidth, float halfHeight) {
         if (fluid == null || fluid.getFluid() == null) return;
 
         TextureAtlasSprite sprite = Minecraft.getMinecraft().getTextureMapBlocks()
@@ -370,11 +371,10 @@ public class DrawerRenderer extends TileEntitySpecialRenderer<ControllableDrawer
         Tessellator tessellator = Tessellator.getInstance();
         BufferBuilder buffer = tessellator.getBuffer();
         buffer.begin(7, DefaultVertexFormats.POSITION_TEX);
-        float half = 0.35F;
-        buffer.pos(-half, -half, 0).tex(sprite.getMinU(), sprite.getMaxV()).endVertex();
-        buffer.pos(half, -half, 0).tex(sprite.getMaxU(), sprite.getMaxV()).endVertex();
-        buffer.pos(half, half, 0).tex(sprite.getMaxU(), sprite.getMinV()).endVertex();
-        buffer.pos(-half, half, 0).tex(sprite.getMinU(), sprite.getMinV()).endVertex();
+        buffer.pos(-halfWidth, -halfHeight, 0).tex(sprite.getMinU(), sprite.getMaxV()).endVertex();
+        buffer.pos(halfWidth, -halfHeight, 0).tex(sprite.getMaxU(), sprite.getMaxV()).endVertex();
+        buffer.pos(halfWidth, halfHeight, 0).tex(sprite.getMaxU(), sprite.getMinV()).endVertex();
+        buffer.pos(-halfWidth, halfHeight, 0).tex(sprite.getMinU(), sprite.getMinV()).endVertex();
         tessellator.draw();
 
         GlStateManager.enableLighting();
@@ -429,11 +429,10 @@ public class DrawerRenderer extends TileEntitySpecialRenderer<ControllableDrawer
         String text = NumberUtils.getFormattedBigNumber(count);
         FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
 
-        float cX = posX * 16.0f;
+        float offsetX = posX * 16.0f;
         float cY = posY * 16.0f;
         float size = (slotScale >= 1.0f) ? 0.5f : 0.25f;
 
-        float offsetX = cX;
         float offsetY = 16.0f - cY + 4.0f * size; // shift down
 
         GlStateManager.pushMatrix();
@@ -453,7 +452,7 @@ public class DrawerRenderer extends TileEntitySpecialRenderer<ControllableDrawer
         GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
         GlStateManager.depthMask(false);
 
-        fontRenderer.drawString(text, -textWidth / 2, 4, 0xFFFFFFFF, true);
+        fontRenderer.drawString(text, -textWidth / 2F, 4, 0xFFFFFFFF, true);
 
         GlStateManager.depthMask(true);
         GlStateManager.disableBlend();
@@ -472,17 +471,14 @@ public class DrawerRenderer extends TileEntitySpecialRenderer<ControllableDrawer
         GlStateManager.pushMatrix();
 
         // Position the indicator below the slot center
-        float cX = posX;
-        float cY = posY;
         float barWidth = slotScale * 0.5f;   // half the slot width
         float barHeight = slotScale * 0.08f;  // thin bar
         float yOffset = slotScale * 0.415f;   // below center
 
-        float x1 = cX - barWidth / 2f;
-        float x2 = cX + barWidth / 2f;
-        float y1 = cY - yOffset - barHeight;
-        float y2 = cY - yOffset;
-        float z = zOffset;
+        float x1 = posX - barWidth / 2f;
+        float x2 = posX + barWidth / 2f;
+        float y1 = posY - yOffset - barHeight;
+        float y2 = posY - yOffset;
 
         Minecraft.getMinecraft().getTextureManager().bindTexture(INDICATOR_TEXTURE);
         GlStateManager.color(1, 1, 1, 1);
@@ -496,10 +492,10 @@ public class DrawerRenderer extends TileEntitySpecialRenderer<ControllableDrawer
         // Background bar (top half of texture: V 0.0 ~ 0.5) - render for modes 1 and 2
         if (indicatorValue != 3) {
             buffer.begin(7, DefaultVertexFormats.POSITION_TEX);
-            buffer.pos(x1, y1, z).tex(0.0, 0.125).endVertex();
-            buffer.pos(x2, y1, z).tex(0.5, 0.125).endVertex();
-            buffer.pos(x2, y2, z).tex(0.5, 0.0).endVertex();
-            buffer.pos(x1, y2, z).tex(0.0, 0.0).endVertex();
+            buffer.pos(x1, y1, zOffset).tex(0.0, 0.125).endVertex();
+            buffer.pos(x2, y1, zOffset).tex(0.5, 0.125).endVertex();
+            buffer.pos(x2, y2, zOffset).tex(0.5, 0.0).endVertex();
+            buffer.pos(x1, y2, zOffset).tex(0.0, 0.0).endVertex();
             tessellator.draw();
         }
 
@@ -508,10 +504,10 @@ public class DrawerRenderer extends TileEntitySpecialRenderer<ControllableDrawer
             float progressX2 = x1 + (x2 - x1) * progress;
             float progressU2 = 0.5f * progress;
             buffer.begin(7, DefaultVertexFormats.POSITION_TEX);
-            buffer.pos(x1, y1, z + 0.0001f).tex(0.0, 0.625).endVertex();
-            buffer.pos(progressX2, y1, z + 0.0001f).tex(progressU2, 0.625).endVertex();
-            buffer.pos(progressX2, y2, z + 0.0001f).tex(progressU2, 0.5).endVertex();
-            buffer.pos(x1, y2, z + 0.0001f).tex(0.0, 0.5).endVertex();
+            buffer.pos(x1, y1, zOffset + 0.0001f).tex(0.0, 0.625).endVertex();
+            buffer.pos(progressX2, y1, zOffset + 0.0001f).tex(progressU2, 0.625).endVertex();
+            buffer.pos(progressX2, y2, zOffset + 0.0001f).tex(progressU2, 0.5).endVertex();
+            buffer.pos(x1, y2, zOffset + 0.0001f).tex(0.0, 0.5).endVertex();
             tessellator.draw();
         }
 

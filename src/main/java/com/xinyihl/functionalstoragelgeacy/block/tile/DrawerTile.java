@@ -43,7 +43,7 @@ public class DrawerTile extends ControllableDrawerTile {
     }
 
     private BigInventoryHandler createHandler() {
-        return new BigInventoryHandler(drawerType.getSlots(), drawerType.getSlotAmount()) {
+        return new BigInventoryHandler(drawerType.getSlots()) {
             @Override
             public void onChange() {
                 DrawerTile.this.markDirty();

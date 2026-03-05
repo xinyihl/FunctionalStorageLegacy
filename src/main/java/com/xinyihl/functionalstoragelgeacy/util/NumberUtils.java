@@ -16,7 +16,7 @@ public class NumberUtils {
     }
 
     public static String getFormatedBigNumber(int number) {
-        return getFormattedBigNumber((long) number);
+        return getFormattedBigNumber(number);
     }
 
     public static String getFormattedBigNumber(long number) {

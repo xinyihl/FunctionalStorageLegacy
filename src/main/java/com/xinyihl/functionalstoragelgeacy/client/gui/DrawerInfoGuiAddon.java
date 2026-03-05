@@ -78,7 +78,7 @@ public class DrawerInfoGuiAddon {
                 GlStateManager.pushMatrix();
                 GlStateManager.translate(0, 0, 200);
                 GlStateManager.scale(scale, scale, scale);
-                int textX = (int) ((x + 17 - mc.fontRenderer.getStringWidth(amount) / 2) * (1 / scale));
+                int textX = (int) ((x + 17 - mc.fontRenderer.getStringWidth(amount) / 2F) * (1 / scale));
                 int textY = (int) ((y + 12) * (1 / scale));
                 mc.fontRenderer.drawStringWithShadow(amount, textX, textY, 0xFFFFFF);
                 GlStateManager.popMatrix();
@@ -113,18 +113,18 @@ public class DrawerInfoGuiAddon {
                     over = slotLockedDisplay.apply(i);
                 }
                 if (over.isEmpty()) {
-                    tooltip.add("\u00a76" + net.minecraft.client.resources.I18n.format("gui.functionalstoragelgeacy.item")
-                            + "\u00a7f" + net.minecraft.client.resources.I18n.format("gui.functionalstoragelgeacy.empty"));
+                    tooltip.add("§6" + net.minecraft.client.resources.I18n.format("gui.functionalstoragelgeacy.item")
+                            + "§f" + net.minecraft.client.resources.I18n.format("gui.functionalstoragelgeacy.empty"));
                 } else {
-                    tooltip.add("\u00a76" + net.minecraft.client.resources.I18n.format("gui.functionalstoragelgeacy.item")
-                            + "\u00a7f" + over.getDisplayName());
+                    tooltip.add("§6" + net.minecraft.client.resources.I18n.format("gui.functionalstoragelgeacy.item")
+                            + "§f" + over.getDisplayName());
                     String amountStr = NumberUtils.getFormattedNumber(slotStack.apply(i).getCount())
                             + "/" + NumberUtils.getFormattedNumber(slotMaxAmount.apply(i));
-                    tooltip.add("\u00a76" + net.minecraft.client.resources.I18n.format("gui.functionalstoragelgeacy.amount")
-                            + "\u00a7f" + amountStr);
+                    tooltip.add("§6" + net.minecraft.client.resources.I18n.format("gui.functionalstoragelgeacy.amount")
+                            + "§f" + amountStr);
                 }
-                tooltip.add("\u00a76" + net.minecraft.client.resources.I18n.format("gui.functionalstoragelgeacy.slot")
-                        + "\u00a7f" + i);
+                tooltip.add("§6" + net.minecraft.client.resources.I18n.format("gui.functionalstoragelgeacy.slot")
+                        + "§f" + i);
 
                 screen.drawHoveringText(tooltip, mouseX - guiX, mouseY - guiY);
             }

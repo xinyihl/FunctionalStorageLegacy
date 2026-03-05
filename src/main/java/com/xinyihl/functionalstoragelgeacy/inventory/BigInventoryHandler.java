@@ -20,12 +20,10 @@ public abstract class BigInventoryHandler implements IItemHandler, ILockable {
     public static final String AMOUNT = "Amount";
 
     private final int slots;
-    private final int slotAmount;
     private final List<BigStack> storedStacks;
 
-    public BigInventoryHandler(int slots, int slotAmount) {
+    public BigInventoryHandler(int slots) {
         this.slots = slots;
-        this.slotAmount = slotAmount;
         this.storedStacks = new ArrayList<>();
         for (int i = 0; i < slots; i++) {
             this.storedStacks.add(new BigStack(ItemStack.EMPTY, 0));
@@ -60,7 +58,7 @@ public abstract class BigInventoryHandler implements IItemHandler, ILockable {
         if (isValid(slot, stack)) {
             BigStack bigStack = this.storedStacks.get(slot);
             int inserted = Math.max(0, Math.min(getSlotLimit(slot) - bigStack.getAmount(), stack.getCount()));
-            if (inserted <= 0 && !isVoid()) return stack;
+            if (inserted == 0 && !isVoid()) return stack;
             if (!simulate) {
                 if (bigStack.getStack().isEmpty()) {
                     ItemStack template = stack.copy();

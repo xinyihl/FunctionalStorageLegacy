@@ -1,8 +1,6 @@
 package com.xinyihl.functionalstoragelgeacy.block;
 
-import com.xinyihl.functionalstoragelgeacy.FunctionalStorageLgeacy;
 import com.xinyihl.functionalstoragelgeacy.block.tile.CompactingDrawerTile;
-import com.xinyihl.functionalstoragelgeacy.block.tile.ControllableDrawerTile;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -24,31 +22,31 @@ public class CompactingDrawerBlock extends DrawerBlock {
 
     /**
      * Hit detection shapes for 3 compacting slots per facing direction.
-     * Slot 0: bottom-left, Slot 1: bottom-right, Slot 2: top (full width)
+     * Slot 0: top (full width), Slot 1: bottom-left, Slot 2: bottom-right
      */
     private static final Map<EnumFacing, List<AxisAlignedBB>> CACHED_SHAPES = new HashMap<>();
 
     static {
         // NORTH face
         CACHED_SHAPES.put(EnumFacing.NORTH, Arrays.asList(
-                new AxisAlignedBB(1/16D, 1/16D, 0, 7/16D, 7/16D, 1/16D),   // slot 0 (bottom-left)
-                new AxisAlignedBB(9/16D, 1/16D, 0, 15/16D, 7/16D, 1/16D),  // slot 1 (bottom-right)
-                new AxisAlignedBB(1/16D, 9/16D, 0, 15/16D, 15/16D, 1/16D)  // slot 2 (top)
+                new AxisAlignedBB(1 / 16D, 9 / 16D, 0, 15 / 16D, 15 / 16D, 1 / 16D),  // slot 2 (bottom-right)
+                new AxisAlignedBB(9 / 16D, 1 / 16D, 0, 15 / 16D, 7 / 16D, 1 / 16D),   // slot 1 (bottom-left)
+                new AxisAlignedBB(1 / 16D, 1 / 16D, 0, 7 / 16D, 7 / 16D, 1 / 16D)     // slot 0 (top)
         ));
         CACHED_SHAPES.put(EnumFacing.SOUTH, Arrays.asList(
-                new AxisAlignedBB(9/16D, 1/16D, 15/16D, 15/16D, 7/16D, 1),
+                new AxisAlignedBB(1 / 16D, 9 / 16D, 15 / 16D, 15 / 16D, 15 / 16D, 1),
                 new AxisAlignedBB(1/16D, 1/16D, 15/16D, 7/16D, 7/16D, 1),
-                new AxisAlignedBB(1/16D, 9/16D, 15/16D, 15/16D, 15/16D, 1)
+                new AxisAlignedBB(9 / 16D, 1 / 16D, 15 / 16D, 15 / 16D, 7 / 16D, 1)
         ));
         CACHED_SHAPES.put(EnumFacing.EAST, Arrays.asList(
-                new AxisAlignedBB(15/16D, 1/16D, 1/16D, 1, 7/16D, 7/16D),
+                new AxisAlignedBB(15 / 16D, 9 / 16D, 1 / 16D, 1, 15 / 16D, 15 / 16D),
                 new AxisAlignedBB(15/16D, 1/16D, 9/16D, 1, 7/16D, 15/16D),
-                new AxisAlignedBB(15/16D, 9/16D, 1/16D, 1, 15/16D, 15/16D)
+                new AxisAlignedBB(15 / 16D, 1 / 16D, 1 / 16D, 1, 7 / 16D, 7 / 16D)
         ));
         CACHED_SHAPES.put(EnumFacing.WEST, Arrays.asList(
-                new AxisAlignedBB(0, 1/16D, 9/16D, 1/16D, 7/16D, 15/16D),
+                new AxisAlignedBB(0, 9 / 16D, 1 / 16D, 1 / 16D, 15 / 16D, 15 / 16D),
                 new AxisAlignedBB(0, 1/16D, 1/16D, 1/16D, 7/16D, 7/16D),
-                new AxisAlignedBB(0, 9/16D, 1/16D, 1/16D, 15/16D, 15/16D)
+                new AxisAlignedBB(0, 1 / 16D, 9 / 16D, 1 / 16D, 7 / 16D, 15 / 16D)
         ));
     }
 

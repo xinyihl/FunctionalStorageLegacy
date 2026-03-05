@@ -1,6 +1,5 @@
 package com.xinyihl.functionalstoragelgeacy.inventory;
 
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
 /**
@@ -15,7 +14,7 @@ public abstract class EnderInventoryHandler extends BigInventoryHandler {
     private float multiplier = 1;
 
     public EnderInventoryHandler() {
-        super(1, 32); // Ender drawer has 1 slot, base 32 slot amount
+        super(1); // Ender drawer has 1 slot, base 32 slot amount
     }
 
     @Override

@@ -55,31 +55,31 @@ public class WoodDrawerBlock extends DrawerBlock {
         ));
         CACHED_SHAPES.put(DrawerType.X_2, x2);
 
-        // X_4: Four slots in a 2x2 grid
+        // X_4: Four slots in a 2x2 grid (0=TL, 1=TR, 2=BL, 3=BR)
         Map<EnumFacing, List<AxisAlignedBB>> x4 = new HashMap<>();
         x4.put(EnumFacing.NORTH, Arrays.asList(
-                new AxisAlignedBB(1/16D, 9/16D, 0, 7/16D, 15/16D, 1/16D),    // Slot 0 (top-left)
-                new AxisAlignedBB(9/16D, 9/16D, 0, 15/16D, 15/16D, 1/16D),   // Slot 1 (top-right)
-                new AxisAlignedBB(1/16D, 1/16D, 0, 7/16D, 7/16D, 1/16D),     // Slot 2 (bottom-left)
-                new AxisAlignedBB(9/16D, 1/16D, 0, 15/16D, 7/16D, 1/16D)     // Slot 3 (bottom-right)
+                new AxisAlignedBB(9 / 16D, 9 / 16D, 0, 15 / 16D, 15 / 16D, 1 / 16D),   // Slot 0 (top-left)
+                new AxisAlignedBB(1 / 16D, 9 / 16D, 0, 7 / 16D, 15 / 16D, 1 / 16D),    // Slot 1 (top-right)
+                new AxisAlignedBB(9 / 16D, 1 / 16D, 0, 15 / 16D, 7 / 16D, 1 / 16D),    // Slot 2 (bottom-left)
+                new AxisAlignedBB(1 / 16D, 1 / 16D, 0, 7 / 16D, 7 / 16D, 1 / 16D)      // Slot 3 (bottom-right)
         ));
         x4.put(EnumFacing.SOUTH, Arrays.asList(
-                new AxisAlignedBB(9/16D, 9/16D, 15/16D, 15/16D, 15/16D, 1),
-                new AxisAlignedBB(1/16D, 9/16D, 15/16D, 7/16D, 15/16D, 1),
-                new AxisAlignedBB(9/16D, 1/16D, 15/16D, 15/16D, 7/16D, 1),
-                new AxisAlignedBB(1/16D, 1/16D, 15/16D, 7/16D, 7/16D, 1)
+                new AxisAlignedBB(1 / 16D, 9 / 16D, 15 / 16D, 7 / 16D, 15 / 16D, 1),   // Slot 0 (top-left)
+                new AxisAlignedBB(9 / 16D, 9 / 16D, 15 / 16D, 15 / 16D, 15 / 16D, 1),  // Slot 1 (top-right)
+                new AxisAlignedBB(1 / 16D, 1 / 16D, 15 / 16D, 7 / 16D, 7 / 16D, 1),    // Slot 2 (bottom-left)
+                new AxisAlignedBB(9 / 16D, 1 / 16D, 15 / 16D, 15 / 16D, 7 / 16D, 1)    // Slot 3 (bottom-right)
         ));
         x4.put(EnumFacing.WEST, Arrays.asList(
-                new AxisAlignedBB(0, 9/16D, 9/16D, 1/16D, 15/16D, 15/16D),
-                new AxisAlignedBB(0, 9/16D, 1/16D, 1/16D, 15/16D, 7/16D),
-                new AxisAlignedBB(0, 1/16D, 9/16D, 1/16D, 7/16D, 15/16D),
-                new AxisAlignedBB(0, 1/16D, 1/16D, 1/16D, 7/16D, 7/16D)
+                new AxisAlignedBB(0, 9 / 16D, 1 / 16D, 1 / 16D, 15 / 16D, 7 / 16D),    // Slot 0 (top-left)
+                new AxisAlignedBB(0, 9 / 16D, 9 / 16D, 1 / 16D, 15 / 16D, 15 / 16D),   // Slot 1 (top-right)
+                new AxisAlignedBB(0, 1 / 16D, 1 / 16D, 1 / 16D, 7 / 16D, 7 / 16D),     // Slot 2 (bottom-left)
+                new AxisAlignedBB(0, 1 / 16D, 9 / 16D, 1 / 16D, 7 / 16D, 15 / 16D)     // Slot 3 (bottom-right)
         ));
         x4.put(EnumFacing.EAST, Arrays.asList(
-                new AxisAlignedBB(15/16D, 9/16D, 1/16D, 1, 15/16D, 7/16D),
-                new AxisAlignedBB(15/16D, 9/16D, 9/16D, 1, 15/16D, 15/16D),
-                new AxisAlignedBB(15/16D, 1/16D, 1/16D, 1, 7/16D, 7/16D),
-                new AxisAlignedBB(15/16D, 1/16D, 9/16D, 1, 7/16D, 15/16D)
+                new AxisAlignedBB(15 / 16D, 9 / 16D, 9 / 16D, 1, 15 / 16D, 15 / 16D),  // Slot 0 (top-left)
+                new AxisAlignedBB(15 / 16D, 9 / 16D, 1 / 16D, 1, 15 / 16D, 7 / 16D),   // Slot 1 (top-right)
+                new AxisAlignedBB(15 / 16D, 1 / 16D, 9 / 16D, 1, 7 / 16D, 15 / 16D),   // Slot 2 (bottom-left)
+                new AxisAlignedBB(15 / 16D, 1 / 16D, 1 / 16D, 1, 7 / 16D, 7 / 16D)     // Slot 3 (bottom-right)
         ));
         CACHED_SHAPES.put(DrawerType.X_4, x4);
     }

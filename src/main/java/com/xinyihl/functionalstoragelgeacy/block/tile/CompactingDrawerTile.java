@@ -278,7 +278,7 @@ public class CompactingDrawerTile extends ControllableDrawerTile {
     }
 
     @Override
-    public int getStorageSlotAmount() {
+    public int getStorageUpgradesAmount() {
         return 3;
     }
 

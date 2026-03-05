@@ -86,7 +86,7 @@ public abstract class CompactingInventoryHandler implements IItemHandler, ILocka
     @Override
     public ItemStack extractItem(int slot, int amount, boolean simulate) {
         if (amount <= 0 || slot >= slots) return ItemStack.EMPTY;
-        Result result = results.get(slot);
+        Result result = results.get(slot).copy();
         if (result.getStack().isEmpty()) return ItemStack.EMPTY;
 
         int totalBase = getTotalInBase();
@@ -97,8 +97,8 @@ public abstract class CompactingInventoryHandler implements IItemHandler, ILocka
 
         if (!simulate && !isCreative()) {
             if (!isLocked() && toExtract >= available) {
-                // Taking everything - clear if not locked
-                setTotalInBase(0);
+                // Taking everything while unlocked - reset to an unconfigured compacting drawer.
+                resetConfiguration();
             } else {
                 setTotalInBase(totalBase - toExtract * result.getNeeded());
             }
@@ -218,6 +218,15 @@ public abstract class CompactingInventoryHandler implements IItemHandler, ILocka
         setup = true;
     }
 
+    private void resetConfiguration() {
+        setTotalInBase(0);
+        for (Result result : results) {
+            result.setStack(ItemStack.EMPTY);
+            result.setNeeded(1);
+        }
+        setup = false;
+    }
+
     private int getBaseSlot() {
         return results.size() - 1;
     }
@@ -252,6 +261,10 @@ public abstract class CompactingInventoryHandler implements IItemHandler, ILocka
 
         public void setNeeded(int needed) {
             this.needed = Math.max(1, needed);
+        }
+
+        public Result copy() {
+            return new Result(stack.copy(), needed);
         }
     }
 }

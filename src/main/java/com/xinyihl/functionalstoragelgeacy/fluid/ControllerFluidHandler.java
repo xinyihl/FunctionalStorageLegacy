@@ -6,6 +6,7 @@ import net.minecraftforge.fluids.capability.IFluidTankProperties;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -28,9 +29,7 @@ public class ControllerFluidHandler implements IFluidHandler {
     public IFluidTankProperties[] getTankProperties() {
         List<IFluidTankProperties> props = new ArrayList<>();
         for (IFluidHandler handler : handlers) {
-            for (IFluidTankProperties prop : handler.getTankProperties()) {
-                props.add(prop);
-            }
+            props.addAll(Arrays.asList(handler.getTankProperties()));
         }
         return props.toArray(new IFluidTankProperties[0]);
     }

@@ -16,8 +16,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -199,12 +197,6 @@ public class StorageControllerTile extends ControllableDrawerTile {
     }
 
     /**
-     * Add or remove connected drawers.
-     * @param action ADD or REMOVE
-     * @param positions Drawer positions to link/unlink
-     * @return true if any change was made
-     */
-    /**
      * Get the effective controller search range.
      * Base range from config multiplied by range fraction from storage upgrades.
      */
@@ -277,12 +269,7 @@ public class StorageControllerTile extends ControllableDrawerTile {
     }
 
     @Override
-    public int getStorageSlotAmount() {
-        return 4;
-    }
-
-    @Override
-    public int getUtilitySlotAmount() {
+    public int getUtilityUpgradesAmount() {
         return 0;
     }
 

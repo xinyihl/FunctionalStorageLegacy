@@ -1,12 +1,6 @@
 package com.xinyihl.functionalstoragelgeacy.config;
 
-import com.xinyihl.functionalstoragelgeacy.Tags;
-import net.minecraftforge.common.config.Config;
-import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.fml.client.event.ConfigChangedEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.io.File;
 
@@ -31,10 +25,8 @@ public class FunctionalStorageConfig {
     public static int RANGE_DIVISOR = 4;
     public static boolean ENABLE_TOP_COMPATIBILITY = false;
 
-    private static Configuration config;
-
     public static void init(File configFile) {
-        config = new Configuration(configFile);
+        Configuration config = new Configuration(configFile);
         config.load();
 
         ARMORY_CABINET_SIZE = config.getInt("armoryCabinetSize", "general", 4096, 1, Integer.MAX_VALUE, "Armory slot amount");
@@ -56,17 +48,6 @@ public class FunctionalStorageConfig {
 
         if (config.hasChanged()) {
             config.save();
-        }
-    }
-
-    public static int getLevelMult(int level) {
-        switch (level) {
-            case -1: return Integer.MAX_VALUE;
-            case 1: return COPPER_MULTIPLIER;
-            case 2: return GOLD_MULTIPLIER;
-            case 3: return DIAMOND_MULTIPLIER;
-            case 4: return NETHERITE_MULTIPLIER;
-            default: return 1;
         }
     }
 }

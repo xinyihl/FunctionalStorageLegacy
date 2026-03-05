@@ -1,6 +1,5 @@
 package com.xinyihl.functionalstoragelgeacy.block.tile;
 
-import com.xinyihl.functionalstoragelgeacy.FunctionalStorageLgeacy;
 import com.xinyihl.functionalstoragelgeacy.fluid.ControllerFluidHandler;
 import com.xinyihl.functionalstoragelgeacy.inventory.ControllerInventoryHandler;
 import com.xinyihl.functionalstoragelgeacy.util.ConnectedDrawers;
@@ -23,8 +22,8 @@ import javax.annotation.Nullable;
 public class ControllerExtensionTile extends ControllableDrawerTile {
 
     private BlockPos linkedControllerPos;
-    private ControllerInventoryHandler inventoryHandler;
-    private ControllerFluidHandler fluidHandler;
+    private final ControllerInventoryHandler inventoryHandler;
+    private final ControllerFluidHandler fluidHandler;
 
     public ControllerExtensionTile() {
         super();
@@ -135,12 +134,12 @@ public class ControllerExtensionTile extends ControllableDrawerTile {
     }
 
     @Override
-    public int getStorageSlotAmount() {
+    public int getStorageUpgradesAmount() {
         return 0;
     }
 
     @Override
-    public int getUtilitySlotAmount() {
+    public int getUtilityUpgradesAmount() {
         return 0;
     }
 

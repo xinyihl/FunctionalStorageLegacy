@@ -57,14 +57,14 @@ public class FluidDrawerInfoGuiAddon {
             return new int[]{9, 9, 30, 30};
         }
         if (slotAmount == 2) {
-            if (currentSlot == 0) return new int[]{0, 30, 48, 13};
-            if (currentSlot == 1) return new int[]{0, 6, 48, 13};
+            if (currentSlot == 0) return new int[]{0, 6, 48, 13};
+            if (currentSlot == 1) return new int[]{0, 30, 48, 13};
         }
         if (slotAmount == 4) {
-            if (currentSlot == 0) return new int[]{30, 30, 16, 16};
-            if (currentSlot == 1) return new int[]{2, 30, 16, 16};
-            if (currentSlot == 2) return new int[]{30, 2, 16, 16};
-            if (currentSlot == 3) return new int[]{2, 2, 16, 16};
+            if (currentSlot == 0) return new int[]{2, 2, 16, 16};
+            if (currentSlot == 1) return new int[]{30, 2, 16, 16};
+            if (currentSlot == 2) return new int[]{2, 30, 16, 16};
+            if (currentSlot == 3) return new int[]{30, 30, 16, 16};
         }
         return new int[]{0, 0, 0, 0};
     }
@@ -77,14 +77,14 @@ public class FluidDrawerInfoGuiAddon {
             return new int[]{9, 9, 30, 30};
         }
         if (slotAmount == 2) {
-            if (currentSlot == 0) return new int[]{6, 30, 36, 12};
-            if (currentSlot == 1) return new int[]{6, 6, 36, 12};
+            if (currentSlot == 0) return new int[]{6, 6, 36, 12};
+            if (currentSlot == 1) return new int[]{6, 30, 36, 12};
         }
         if (slotAmount == 4) {
-            if (currentSlot == 0) return new int[]{30, 30, 12, 12};
-            if (currentSlot == 1) return new int[]{6, 30, 12, 12};
-            if (currentSlot == 2) return new int[]{30, 6, 12, 12};
-            if (currentSlot == 3) return new int[]{6, 6, 12, 12};
+            if (currentSlot == 0) return new int[]{6, 6, 12, 12};
+            if (currentSlot == 1) return new int[]{30, 6, 12, 12};
+            if (currentSlot == 2) return new int[]{6, 30, 12, 12};
+            if (currentSlot == 3) return new int[]{30, 30, 12, 12};
         }
         return new int[]{0, 0, 0, 0};
     }
@@ -129,7 +129,7 @@ public class FluidDrawerInfoGuiAddon {
                 GlStateManager.pushMatrix();
                 GlStateManager.translate(0, 0, 200);
                 GlStateManager.scale(scale, scale, scale);
-                int textX = (int) ((x + 17 - mc.fontRenderer.getStringWidth(amount) / 2) * (1 / scale));
+                int textX = (int) ((x + 17 - mc.fontRenderer.getStringWidth(amount) / 2F) * (1 / scale));
                 int textY = (int) ((y + 12) * (1 / scale));
                 mc.fontRenderer.drawStringWithShadow(amount, textX, textY, 0xFFFFFF);
                 GlStateManager.popMatrix();
@@ -164,20 +164,20 @@ public class FluidDrawerInfoGuiAddon {
                     over = tank.getLockedFluid();
                 }
                 if (over == null || over.amount <= 0) {
-                    tooltip.add("\u00a76" + net.minecraft.client.resources.I18n.format("gui.functionalstoragelgeacy.fluid")
-                            + "\u00a7f" + net.minecraft.client.resources.I18n.format("gui.functionalstoragelgeacy.empty"));
+                    tooltip.add("§6" + net.minecraft.client.resources.I18n.format("gui.functionalstoragelgeacy.fluid")
+                            + "§f" + net.minecraft.client.resources.I18n.format("gui.functionalstoragelgeacy.empty"));
                 } else {
-                    tooltip.add("\u00a76" + net.minecraft.client.resources.I18n.format("gui.functionalstoragelgeacy.fluid")
-                            + "\u00a7f" + over.getLocalizedName());
+                    tooltip.add("§6" + net.minecraft.client.resources.I18n.format("gui.functionalstoragelgeacy.fluid")
+                            + "§f" + over.getLocalizedName());
                     FluidStack actual = fluidHandlerSupplier.get().getTankFluid(i);
                     int actualAmount = actual != null ? actual.amount : 0;
                     String amountStr = NumberUtils.getFormattedFluid(actualAmount)
                             + "/" + NumberUtils.getFormattedFluid(slotMaxAmount.apply(i));
-                    tooltip.add("\u00a76" + net.minecraft.client.resources.I18n.format("gui.functionalstoragelgeacy.amount")
-                            + "\u00a7f" + amountStr);
+                    tooltip.add("§6" + net.minecraft.client.resources.I18n.format("gui.functionalstoragelgeacy.amount")
+                            + "§f" + amountStr);
                 }
-                tooltip.add("\u00a76" + net.minecraft.client.resources.I18n.format("gui.functionalstoragelgeacy.slot")
-                        + "\u00a7f" + i);
+                tooltip.add("§6" + net.minecraft.client.resources.I18n.format("gui.functionalstoragelgeacy.slot")
+                        + "§f" + i);
 
                 screen.drawHoveringText(tooltip, mouseX - guiX, mouseY - guiY);
             }

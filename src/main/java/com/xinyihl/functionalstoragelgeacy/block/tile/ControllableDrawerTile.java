@@ -42,7 +42,7 @@ public abstract class ControllableDrawerTile extends TileEntity implements ITick
 
     public ControllableDrawerTile() {
         this.drawerOptions = new DrawerOptions();
-        this.storageUpgrades = new ItemStackHandler(getStorageSlotAmount()) {
+        this.storageUpgrades = new ItemStackHandler(getStorageUpgradesAmount()) {
             @Override
             public boolean isItemValid(int slot, ItemStack stack) {
                 return stack.getItem() instanceof StorageUpgradeItem
@@ -60,7 +60,7 @@ public abstract class ControllableDrawerTile extends TileEntity implements ITick
                 markDirty();
             }
         };
-        this.utilityUpgrades = new ItemStackHandler(getUtilitySlotAmount()) {
+        this.utilityUpgrades = new ItemStackHandler(getUtilityUpgradesAmount()) {
             @Override
             public boolean isItemValid(int slot, ItemStack stack) {
                 return stack.getItem() instanceof UpgradeItem
@@ -375,11 +375,11 @@ public abstract class ControllableDrawerTile extends TileEntity implements ITick
         return drawerOptions;
     }
 
-    public int getStorageSlotAmount() {
+    public int getStorageUpgradesAmount() {
         return 4;
     }
 
-    public int getUtilitySlotAmount() {
+    public int getUtilityUpgradesAmount() {
         return 3;
     }
 

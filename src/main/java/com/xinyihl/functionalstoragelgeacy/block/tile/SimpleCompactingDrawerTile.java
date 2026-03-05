@@ -14,9 +14,4 @@ public class SimpleCompactingDrawerTile extends CompactingDrawerTile {
     protected int getSlotCount() {
         return 2;
     }
-
-    @Override
-    public int getStorageSlotAmount() {
-        return 3;
-    }
 }

@@ -203,7 +203,7 @@ public class EnderDrawerTile extends ControllableDrawerTile {
     }
 
     @Override
-    public int getStorageSlotAmount() {
+    public int getStorageUpgradesAmount() {
         return 0; // No storage upgrades for ender drawers
     }
 
