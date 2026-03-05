@@ -80,7 +80,13 @@ public class CompactingDrawerTile extends ControllableDrawerTile {
             // Check recipes on first tick
             if (!hasCheckedRecipes) {
                 if (handler.isSetup() && !getParentStack().isEmpty()) {
-                    List<CompactingInventoryHandler.Result> results = CompactingUtil.getCompactingResults(this.world, getParentStack(), getSlotCount());
+                    int anchorSlot = getFirstNonEmptySlot();
+                    List<CompactingInventoryHandler.Result> results = CompactingUtil.getCompactingResults(
+                            this.world,
+                            getParentStack(),
+                            getSlotCount(),
+                            anchorSlot
+                    );
                     if (!results.isEmpty()) {
                         applyCompactingResults(results);
                     }
@@ -118,7 +124,7 @@ public class CompactingDrawerTile extends ControllableDrawerTile {
             if (!handler.isSetup() && !heldStack.isEmpty()) {
                 ItemStack template = heldStack.copy();
                 template.setCount(1);
-                List<CompactingInventoryHandler.Result> results = CompactingUtil.getCompactingResults(this.world, template, getSlotCount());
+                List<CompactingInventoryHandler.Result> results = CompactingUtil.getCompactingResults(this.world, template, getSlotCount(), slot);
                 if (!results.isEmpty()) {
                     applyCompactingResults(results);
                     markDirty();
@@ -136,7 +142,7 @@ public class CompactingDrawerTile extends ControllableDrawerTile {
             }
 
             // Double-click fast insert
-            if (System.currentTimeMillis() - INTERACTION_LOGGER.getOrDefault(player.getUniqueID(), System.currentTimeMillis()) < 300 && (isLocked() || !handler.getStackInSlot(0).isEmpty())) {
+            if (System.currentTimeMillis() - INTERACTION_LOGGER.getOrDefault(player.getUniqueID(), System.currentTimeMillis()) < 300 && (isLocked() || !handler.getStackInSlot(slot).isEmpty())) {
                 for (int i = 0; i < player.inventory.getSizeInventory(); i++) {
                     ItemStack invStack = player.inventory.getStackInSlot(i);
                     if (!invStack.isEmpty()) {
@@ -165,6 +171,16 @@ public class CompactingDrawerTile extends ControllableDrawerTile {
                 ItemHandlerHelper.giveItemToPlayer(player, extracted);
             }
         }
+    }
+
+    private int getFirstNonEmptySlot() {
+        List<CompactingInventoryHandler.Result> results = handler.getResults();
+        for (int i = 0; i < results.size(); i++) {
+            if (!results.get(i).getStack().isEmpty()) {
+                return i;
+            }
+        }
+        return 0;
     }
 
     private void applyCompactingResults(List<CompactingInventoryHandler.Result> compactingResults) {

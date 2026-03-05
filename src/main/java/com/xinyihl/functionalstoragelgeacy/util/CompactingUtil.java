@@ -124,6 +124,55 @@ public class CompactingUtil {
     }
 
     /**
+     * Find compacting results anchored to a clicked slot.
+     * The clicked slot will always display the clicked item, slots to the left become higher tiers,
+     * and slots to the right become lower tiers. Remaining slots are empty.
+     */
+    public static List<CompactingInventoryHandler.Result> getCompactingResults(World world, ItemStack stack, int maxSlots, int clickedSlot) {
+        List<CompactingInventoryHandler.Result> base = getCompactingResults(world, stack, maxSlots);
+        if (clickedSlot < 0 || clickedSlot >= maxSlots) {
+            return base;
+        }
+
+        int clickedIndex = -1;
+        for (int i = 0; i < base.size(); i++) {
+            ItemStack tierStack = base.get(i).getStack();
+            if (!tierStack.isEmpty() && BigInventoryHandler.areItemStacksEqual(tierStack, stack)) {
+                clickedIndex = i;
+                break;
+            }
+        }
+
+        if (clickedIndex < 0) {
+            return base;
+        }
+
+        List<CompactingInventoryHandler.Result> anchored = new ArrayList<>();
+        for (int i = 0; i < maxSlots; i++) {
+            anchored.add(new CompactingInventoryHandler.Result(ItemStack.EMPTY, 1));
+        }
+
+        // Place clicked item in clicked slot.
+        anchored.set(clickedSlot, new CompactingInventoryHandler.Result(base.get(clickedIndex).getStack(), base.get(clickedIndex).getNeeded()));
+
+        // Fill left side with higher tiers (if any).
+        int leftSource = clickedIndex - 1;
+        for (int leftSlot = clickedSlot - 1; leftSlot >= 0 && leftSource >= 0; leftSlot--, leftSource--) {
+            CompactingInventoryHandler.Result source = base.get(leftSource);
+            anchored.set(leftSlot, new CompactingInventoryHandler.Result(source.getStack(), source.getNeeded()));
+        }
+
+        // Fill right side with lower tiers (if any).
+        int rightSource = clickedIndex + 1;
+        for (int rightSlot = clickedSlot + 1; rightSlot < maxSlots && rightSource < base.size(); rightSlot++, rightSource++) {
+            CompactingInventoryHandler.Result source = base.get(rightSource);
+            anchored.set(rightSlot, new CompactingInventoryHandler.Result(source.getStack(), source.getNeeded()));
+        }
+
+        return anchored;
+    }
+
+    /**
      * Find a higher tier item by crafting input in a 3x3 or 2x2 grid.
      */
     private static HigherTier findHigherTier(World world, ItemStack input) {

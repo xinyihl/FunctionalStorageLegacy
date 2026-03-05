@@ -112,7 +112,7 @@ public class DrawerTile extends ControllableDrawerTile {
             }
 
             // Double-click fast insert from inventory
-            if (System.currentTimeMillis() - INTERACTION_LOGGER.getOrDefault(player.getUniqueID(), System.currentTimeMillis()) < 300 && (isLocked() || !handler.getStackInSlot(0).isEmpty())) {
+            if (System.currentTimeMillis() - INTERACTION_LOGGER.getOrDefault(player.getUniqueID(), System.currentTimeMillis()) < 300 && (isLocked() || !handler.getStackInSlot(slot).isEmpty())) {
                 for (int i = 0; i < player.inventory.getSizeInventory(); i++) {
                     ItemStack invStack = player.inventory.getStackInSlot(i);
                     if (!invStack.isEmpty()) {

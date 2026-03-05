@@ -158,8 +158,8 @@ public class DrawerRenderer extends TileEntitySpecialRenderer<ControllableDrawer
         boolean showRender = options == null || options.isShowItemRender();
         boolean showCount = options == null || options.isShowItemCount();
 
-        renderCompactSlot(handler, 0, 0.5F, 0.27F, showRender, showCount, options);
-        renderCompactSlot(handler, 1, 0.5F, 0.77F, showRender, showCount, options);
+        renderCompactSlot(handler, 0, 0.5F, 0.77F, showRender, showCount, options);
+        renderCompactSlot(handler, 1, 0.5F, 0.27F, showRender, showCount, options);
     }
 
     private void renderCompactingSlots(CompactingDrawerTile te, ControllableDrawerTile.DrawerOptions options) {

@@ -1,18 +1,12 @@
 package com.xinyihl.functionalstoragelgeacy.block;
 
-import com.xinyihl.functionalstoragelgeacy.FunctionalStorageLgeacy;
+import com.xinyihl.functionalstoragelgeacy.block.tile.ControllableDrawerTile;
 import com.xinyihl.functionalstoragelgeacy.block.tile.StorageControllerTile;
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyDirection;
-import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -52,9 +46,7 @@ public class DrawerControllerBlock extends DrawerBlock {
     }
 
     @Override
-    public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-        // Controller drops as a simple block (no tile data to save)
-        spawnAsEntity(worldIn, pos, new ItemStack(this));
-        super.breakBlock(worldIn, pos, state);
+    public ItemStack createStackWithTileData(ControllableDrawerTile tile) {
+        return new ItemStack(this);
     }
 }
