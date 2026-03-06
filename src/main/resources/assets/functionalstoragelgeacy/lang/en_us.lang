@@ -46,6 +46,11 @@ item.functionalstoragelgeacy.redstone_upgrade.name=Redstone Upgrade
 item.functionalstoragelgeacy.pulling_upgrade.name=Pulling Upgrade
 item.functionalstoragelgeacy.pushing_upgrade.name=Pushing Upgrade
 item.functionalstoragelgeacy.collector_upgrade.name=Collector Upgrade
+item.functionalstoragelgeacy.breaker_upgrade.name=Breaker Upgrade
+item.functionalstoragelgeacy.placer_upgrade.name=Placer Upgrade
+item.functionalstoragelgeacy.refill_upgrade.name=Refill Upgrade
+item.functionalstoragelgeacy.dimensional_refill_upgrade.name=Dimensional Refill Upgrade
+item.functionalstoragelgeacy.speed_upgrade_augment.name=Speed Upgrade Augment
 
 # Tools
 item.functionalstoragelgeacy.configuration_tool.name=Configuration Tool
@@ -63,6 +68,19 @@ item.functionalstoragelgeacy.upgrade.direction.north=North
 item.functionalstoragelgeacy.upgrade.direction.south=South
 item.functionalstoragelgeacy.upgrade.direction.west=West
 item.functionalstoragelgeacy.upgrade.direction.east=East
+item.functionalstoragelgeacy.mfs_upgrade.speed=Speed: %s ticks
+item.functionalstoragelgeacy.mfs_upgrade.redstone=Redstone:
+item.functionalstoragelgeacy.mfs_upgrade.redstone.ignore=Ignore
+item.functionalstoragelgeacy.mfs_upgrade.redstone.high=Only When Powered
+item.functionalstoragelgeacy.mfs_upgrade.redstone.low=Only When Unpowered
+item.functionalstoragelgeacy.mfs_upgrade.redstone.pulse=On Redstone Pulse
+item.functionalstoragelgeacy.mfs_upgrade.direction=Direction:
+item.functionalstoragelgeacy.mfs_upgrade.direction.front=Front
+item.functionalstoragelgeacy.mfs_upgrade.direction.back=Back
+item.functionalstoragelgeacy.mfs_upgrade.direction.left=Left
+item.functionalstoragelgeacy.mfs_upgrade.direction.right=Right
+item.functionalstoragelgeacy.mfs_upgrade.direction.up=Up
+item.functionalstoragelgeacy.mfs_upgrade.direction.down=Down
 
 # Linking Tool Messages
 linkingtool.controller.configured=Controller position saved!
@@ -108,6 +126,19 @@ gui.functionalstoragelgeacy.fluid=Fluid:
 gui.functionalstoragelgeacy.amount=Amount: 
 gui.functionalstoragelgeacy.slot=Slot: 
 gui.functionalstoragelgeacy.empty=Empty
+gui.functionalstoragelgeacy.back=Back
+gui.functionalstoragelgeacy.mfs_upgrade.title=Drawer Upgrade
+gui.functionalstoragelgeacy.mfs_upgrade.augment=Augment
+gui.functionalstoragelgeacy.mfs_upgrade.tool=Tool
+gui.functionalstoragelgeacy.mfs_upgrade.filters=Filters
+gui.functionalstoragelgeacy.mfs_upgrade.direction=Direction
+gui.functionalstoragelgeacy.mfs_upgrade.redstone=Redstone
+gui.functionalstoragelgeacy.mfs_upgrade.refill_target=Refill Target
+gui.functionalstoragelgeacy.mfs_upgrade.refill.hotbar=Hotbar
+gui.functionalstoragelgeacy.mfs_upgrade.refill.inventory=Main Inventory
+gui.functionalstoragelgeacy.mfs_upgrade.refill.ender=Ender Chest
+gui.functionalstoragelgeacy.mfs_upgrade.blacklist=Blacklist: %s
+gui.functionalstoragelgeacy.mfs_upgrade.match_nbt=Match NBT: %s
 
 # Drawer Item Tooltip
 drawer.tooltip.stored=Stored:

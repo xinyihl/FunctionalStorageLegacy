@@ -1,7 +1,10 @@
 package com.xinyihl.functionalstoragelgeacy.container;
 
 import com.xinyihl.functionalstoragelgeacy.block.tile.ControllableDrawerTile;
+import com.xinyihl.functionalstoragelgeacy.item.MFSUpgradeItem;
 import com.xinyihl.functionalstoragelgeacy.item.StorageUpgradeItem;
+import com.xinyihl.functionalstoragelgeacy.network.NetworkHandler;
+import com.xinyihl.functionalstoragelgeacy.network.PacketMFSUpgradeAction;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -57,6 +60,23 @@ public class ContainerDrawer extends Container {
     @Nonnull
     @Override
     public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, EntityPlayer player) {
+        int utilityStart = tile.getStorageUpgrades().getSlots();
+        int utilityEnd = utilityStart + tile.getUtilityUpgrades().getSlots();
+        if (clickTypeIn == ClickType.PICKUP && dragType == 1 && slotId >= utilityStart && slotId < utilityEnd) {
+            Slot slot = inventorySlots.get(slotId);
+            if (slot.getHasStack() && slot.getStack().getItem() instanceof MFSUpgradeItem) {
+                if (player.world.isRemote) {
+                    NetworkHandler.CHANNEL.sendToServer(new PacketMFSUpgradeAction(
+                            tile.getPos(),
+                            slotId - utilityStart,
+                            PacketMFSUpgradeAction.Action.OPEN_UPGRADE_GUI,
+                            0
+                    ));
+                }
+                return player.inventory.getItemStack();
+            }
+        }
+
         if (clickTypeIn == ClickType.PICKUP
                 && slotId >= 0
                 && slotId < tile.getStorageUpgrades().getSlots()) {

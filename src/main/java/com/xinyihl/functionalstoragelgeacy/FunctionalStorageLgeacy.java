@@ -9,6 +9,8 @@ import com.xinyihl.functionalstoragelgeacy.network.NetworkHandler;
 import com.xinyihl.functionalstoragelgeacy.proxy.CommonProxy;
 import com.xinyihl.functionalstoragelgeacy.util.DrawerWoodType;
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,6 +18,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.event.RegistryEvent;
@@ -29,6 +32,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -80,6 +84,11 @@ public class FunctionalStorageLgeacy {
     public static UpgradeItem PULLING_UPGRADE;
     public static UpgradeItem PUSHING_UPGRADE;
     public static UpgradeItem COLLECTOR_UPGRADE;
+    public static BreakerUpgradeItem BREAKER_UPGRADE;
+    public static PlacerUpgradeItem PLACER_UPGRADE;
+    public static RefillUpgradeItem REFILL_UPGRADE;
+    public static RefillUpgradeItem DIMENSIONAL_REFILL_UPGRADE;
+    public static SpeedUpgradeAugmentItem SPEED_UPGRADE_AUGMENT;
 
     // Tools
     public static ConfigurationToolItem CONFIGURATION_TOOL;
@@ -96,6 +105,7 @@ public class FunctionalStorageLgeacy {
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
+        registerRecipes();
         proxy.init(event);
     }
 
@@ -211,6 +221,30 @@ public class FunctionalStorageLgeacy {
             COLLECTOR_UPGRADE.setRegistryName("collector_upgrade");
             COLLECTOR_UPGRADE.setTranslationKey(Tags.MOD_ID + ".collector_upgrade");
 
+            BREAKER_UPGRADE = new BreakerUpgradeItem();
+            BREAKER_UPGRADE.setRegistryName("breaker_upgrade");
+            BREAKER_UPGRADE.setTranslationKey(Tags.MOD_ID + ".breaker_upgrade");
+            BREAKER_UPGRADE.incompatibleWith(BREAKER_UPGRADE);
+
+            PLACER_UPGRADE = new PlacerUpgradeItem();
+            PLACER_UPGRADE.setRegistryName("placer_upgrade");
+            PLACER_UPGRADE.setTranslationKey(Tags.MOD_ID + ".placer_upgrade");
+            PLACER_UPGRADE.incompatibleWith(PLACER_UPGRADE);
+
+            REFILL_UPGRADE = new RefillUpgradeItem(false);
+            REFILL_UPGRADE.setRegistryName("refill_upgrade");
+            REFILL_UPGRADE.setTranslationKey(Tags.MOD_ID + ".refill_upgrade");
+
+            DIMENSIONAL_REFILL_UPGRADE = new RefillUpgradeItem(true);
+            DIMENSIONAL_REFILL_UPGRADE.setRegistryName("dimensional_refill_upgrade");
+            DIMENSIONAL_REFILL_UPGRADE.setTranslationKey(Tags.MOD_ID + ".dimensional_refill_upgrade");
+            REFILL_UPGRADE.incompatibleWith(DIMENSIONAL_REFILL_UPGRADE);
+            DIMENSIONAL_REFILL_UPGRADE.incompatibleWith(REFILL_UPGRADE);
+
+            SPEED_UPGRADE_AUGMENT = new SpeedUpgradeAugmentItem();
+            SPEED_UPGRADE_AUGMENT.setRegistryName("speed_upgrade_augment");
+            SPEED_UPGRADE_AUGMENT.setTranslationKey(Tags.MOD_ID + ".speed_upgrade_augment");
+
             // Tools
             CONFIGURATION_TOOL = new ConfigurationToolItem();
             CONFIGURATION_TOOL.setRegistryName("configuration_tool");
@@ -232,6 +266,11 @@ public class FunctionalStorageLgeacy {
                     PULLING_UPGRADE,
                     PUSHING_UPGRADE,
                     COLLECTOR_UPGRADE,
+                    BREAKER_UPGRADE,
+                    PLACER_UPGRADE,
+                    REFILL_UPGRADE,
+                    DIMENSIONAL_REFILL_UPGRADE,
+                    SPEED_UPGRADE_AUGMENT,
                     CONFIGURATION_TOOL,
                     LINKING_TOOL
             );
@@ -268,5 +307,47 @@ public class FunctionalStorageLgeacy {
                 }
             }
         }
+    }
+
+    private void registerRecipes() {
+        ItemStack drawer = WOOD_DRAWER_BLOCKS.isEmpty() ? ItemStack.EMPTY : new ItemStack(WOOD_DRAWER_BLOCKS.get(0));
+        if (drawer.isEmpty()) {
+            return;
+        }
+
+        GameRegistry.addShapedRecipe(new ResourceLocation(Tags.MOD_ID, "breaker_upgrade"), null, new ItemStack(BREAKER_UPGRADE),
+                "RSR", "SDS", "RPR",
+                'R', Items.REDSTONE,
+                'S', new ItemStack(Blocks.STONEBRICK),
+                'D', drawer,
+                'P', Items.IRON_PICKAXE);
+
+        GameRegistry.addShapedRecipe(new ResourceLocation(Tags.MOD_ID, "placer_upgrade"), null, new ItemStack(PLACER_UPGRADE),
+                "RdR", "dDd", "RtR",
+                'R', Items.REDSTONE,
+                'd', new ItemStack(Blocks.DISPENSER),
+                'D', drawer,
+                't', new ItemStack(Blocks.DIRT));
+
+        GameRegistry.addShapedRecipe(new ResourceLocation(Tags.MOD_ID, "refill_upgrade"), null, new ItemStack(REFILL_UPGRADE),
+                "RPR", "PDP", "RCR",
+                'R', Items.REDSTONE,
+                'P', Items.ENDER_PEARL,
+                'D', drawer,
+                'C', new ItemStack(Blocks.CHEST));
+
+        GameRegistry.addShapedRecipe(new ResourceLocation(Tags.MOD_ID, "dimensional_refill_upgrade"), null, new ItemStack(DIMENSIONAL_REFILL_UPGRADE),
+                "RPR", "PDP", "RCE",
+                'R', Items.REDSTONE,
+                'P', Items.ENDER_PEARL,
+                'D', drawer,
+                'C', Items.DIAMOND,
+                'E', new ItemStack(Blocks.ENDER_CHEST));
+
+        GameRegistry.addShapedRecipe(new ResourceLocation(Tags.MOD_ID, "speed_upgrade_augment"), null, new ItemStack(SPEED_UPGRADE_AUGMENT, 2),
+                "RGR", "GCG", "RGR",
+                'R', Items.REDSTONE,
+                'G', Items.GOLD_INGOT,
+                'C', Items.CLOCK);
     }
 }

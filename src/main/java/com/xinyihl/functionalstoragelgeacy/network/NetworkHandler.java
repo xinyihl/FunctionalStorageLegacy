@@ -3,6 +3,7 @@ package com.xinyihl.functionalstoragelgeacy.network;
 import com.xinyihl.functionalstoragelgeacy.Tags;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import net.minecraftforge.fml.relauncher.Side;
 
 public class NetworkHandler {
 
@@ -11,8 +12,6 @@ public class NetworkHandler {
 
     public static void init() {
         CHANNEL = NetworkRegistry.INSTANCE.newSimpleChannel(Tags.MOD_ID);
-
-        // Register packets here as needed
-        // Example: CHANNEL.registerMessage(SomePacket.Handler.class, SomePacket.class, packetId++, Side.SERVER);
+        CHANNEL.registerMessage(PacketMFSUpgradeAction.Handler.class, PacketMFSUpgradeAction.class, packetId++, Side.SERVER);
     }
 }

@@ -66,6 +66,11 @@ public class ClientProxy extends CommonProxy {
             registerItemModel(FunctionalStorageLgeacy.PULLING_UPGRADE);
             registerItemModel(FunctionalStorageLgeacy.PUSHING_UPGRADE);
             registerItemModel(FunctionalStorageLgeacy.COLLECTOR_UPGRADE);
+            registerItemModel(FunctionalStorageLgeacy.BREAKER_UPGRADE);
+            registerItemModel(FunctionalStorageLgeacy.PLACER_UPGRADE);
+            registerItemModel(FunctionalStorageLgeacy.REFILL_UPGRADE);
+            registerItemModel(FunctionalStorageLgeacy.DIMENSIONAL_REFILL_UPGRADE);
+            registerItemModel(FunctionalStorageLgeacy.SPEED_UPGRADE_AUGMENT);
             registerItemModel(FunctionalStorageLgeacy.CONFIGURATION_TOOL);
             registerItemModel(FunctionalStorageLgeacy.LINKING_TOOL);
         }

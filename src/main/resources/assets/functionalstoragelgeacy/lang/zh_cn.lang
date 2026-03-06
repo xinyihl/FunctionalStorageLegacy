@@ -41,6 +41,11 @@ item.functionalstoragelgeacy.pulling_upgrade.name=拉取升级
 item.functionalstoragelgeacy.pushing_upgrade.name=推送升级
 item.functionalstoragelgeacy.redstone_upgrade.name=红石升级
 item.functionalstoragelgeacy.void_upgrade.name=虚空升级
+item.functionalstoragelgeacy.breaker_upgrade.name=破坏升级
+item.functionalstoragelgeacy.placer_upgrade.name=放置升级
+item.functionalstoragelgeacy.refill_upgrade.name=补充升级
+item.functionalstoragelgeacy.dimensional_refill_upgrade.name=跨维度补充升级
+item.functionalstoragelgeacy.speed_upgrade_augment.name=速度升级增幅器
 
 # Tooltips
 item.functionalstoragelgeacy.iron_downgrade.desc=减少抽屉存储容量
@@ -54,6 +59,19 @@ item.functionalstoragelgeacy.upgrade.direction.north=北
 item.functionalstoragelgeacy.upgrade.direction.south=南
 item.functionalstoragelgeacy.upgrade.direction.west=西
 item.functionalstoragelgeacy.upgrade.direction.east=东
+item.functionalstoragelgeacy.mfs_upgrade.speed=速度：%s 刻
+item.functionalstoragelgeacy.mfs_upgrade.redstone=红石：
+item.functionalstoragelgeacy.mfs_upgrade.redstone.ignore=忽略
+item.functionalstoragelgeacy.mfs_upgrade.redstone.high=仅供电时
+item.functionalstoragelgeacy.mfs_upgrade.redstone.low=仅未供电时
+item.functionalstoragelgeacy.mfs_upgrade.redstone.pulse=红石脉冲时
+item.functionalstoragelgeacy.mfs_upgrade.direction=方向：
+item.functionalstoragelgeacy.mfs_upgrade.direction.front=前
+item.functionalstoragelgeacy.mfs_upgrade.direction.back=后
+item.functionalstoragelgeacy.mfs_upgrade.direction.left=左
+item.functionalstoragelgeacy.mfs_upgrade.direction.right=右
+item.functionalstoragelgeacy.mfs_upgrade.direction.up=上
+item.functionalstoragelgeacy.mfs_upgrade.direction.down=下
 
 linkingtool.controller=控制器：
 linkingtool.controller.configured=已将控制器与工具连接
@@ -98,6 +116,19 @@ gui.functionalstoragelgeacy.fluid=流体：
 gui.functionalstoragelgeacy.amount=数量：
 gui.functionalstoragelgeacy.slot=槽位：
 gui.functionalstoragelgeacy.empty=空
+gui.functionalstoragelgeacy.back=返回
+gui.functionalstoragelgeacy.mfs_upgrade.title=抽屉升级
+gui.functionalstoragelgeacy.mfs_upgrade.augment=增幅器
+gui.functionalstoragelgeacy.mfs_upgrade.tool=工具
+gui.functionalstoragelgeacy.mfs_upgrade.filters=过滤器
+gui.functionalstoragelgeacy.mfs_upgrade.direction=方向
+gui.functionalstoragelgeacy.mfs_upgrade.redstone=红石
+gui.functionalstoragelgeacy.mfs_upgrade.refill_target=补充目标
+gui.functionalstoragelgeacy.mfs_upgrade.refill.hotbar=快捷栏
+gui.functionalstoragelgeacy.mfs_upgrade.refill.inventory=主背包
+gui.functionalstoragelgeacy.mfs_upgrade.refill.ender=末影箱
+gui.functionalstoragelgeacy.mfs_upgrade.blacklist=黑名单：%s
+gui.functionalstoragelgeacy.mfs_upgrade.match_nbt=匹配 NBT：%s
 
 # Drawer Item Tooltip
 drawer.tooltip.stored=已存储：

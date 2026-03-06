@@ -3,6 +3,8 @@ package com.xinyihl.functionalstoragelgeacy.block.tile;
 import com.xinyihl.functionalstoragelgeacy.FunctionalStorageLgeacy;
 import com.xinyihl.functionalstoragelgeacy.config.FunctionalStorageConfig;
 import com.xinyihl.functionalstoragelgeacy.item.ConfigurationToolItem;
+import com.xinyihl.functionalstoragelgeacy.item.MFSUpgradeDataManager;
+import com.xinyihl.functionalstoragelgeacy.item.MFSUpgradeItem;
 import com.xinyihl.functionalstoragelgeacy.item.StorageUpgradeItem;
 import com.xinyihl.functionalstoragelgeacy.item.UpgradeItem;
 import net.minecraft.block.state.IBlockState;
@@ -23,6 +25,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -35,6 +38,7 @@ public abstract class ControllableDrawerTile extends TileEntity implements ITick
     protected ItemStackHandler storageUpgrades;
     protected ItemStackHandler utilityUpgrades;
     protected DrawerOptions drawerOptions;
+    protected MFSUpgradeDataManager[] mfsUpgradeData;
     protected boolean isCreative = false;
     protected boolean isVoid = false;
     protected boolean isLocked = false;
@@ -85,10 +89,12 @@ public abstract class ControllableDrawerTile extends TileEntity implements ITick
 
             @Override
             protected void onContentsChanged(int slot) {
+                mfsUpgradeData[slot] = new MFSUpgradeDataManager();
                 needsUpgradeCache = true;
                 markDirty();
             }
         };
+        this.mfsUpgradeData = new MFSUpgradeDataManager[getUtilityUpgradesAmount()];
     }
 
     @Override
@@ -114,6 +120,7 @@ public abstract class ControllableDrawerTile extends TileEntity implements ITick
         compound.setBoolean("IsCreative", isCreative);
         compound.setBoolean("IsVoid", isVoid);
         compound.setBoolean("Locked", isLocked);
+        compound.setTag("MFSUpgradeData", serializeMfsUpgradeData());
         if (controllerPos != null) {
             compound.setLong("ControllerPos", controllerPos.toLong());
         }
@@ -135,6 +142,7 @@ public abstract class ControllableDrawerTile extends TileEntity implements ITick
         isCreative = compound.getBoolean("IsCreative");
         isVoid = compound.getBoolean("IsVoid");
         isLocked = compound.getBoolean("Locked");
+        deserializeMfsUpgradeData(compound.getCompoundTag("MFSUpgradeData"));
         if (compound.hasKey("ControllerPos")) {
             controllerPos = BlockPos.fromLong(compound.getLong("ControllerPos"));
         }
@@ -152,6 +160,7 @@ public abstract class ControllableDrawerTile extends TileEntity implements ITick
         nbt.setBoolean("IsCreative", isCreative);
         nbt.setBoolean("IsVoid", isVoid);
         nbt.setBoolean("Locked", isLocked);
+        nbt.setTag("MFSUpgradeData", serializeMfsUpgradeData());
         writeCustomData(nbt);
         return nbt;
     }
@@ -172,6 +181,7 @@ public abstract class ControllableDrawerTile extends TileEntity implements ITick
         isCreative = nbt.getBoolean("IsCreative");
         isVoid = nbt.getBoolean("IsVoid");
         isLocked = nbt.getBoolean("Locked");
+        deserializeMfsUpgradeData(nbt.getCompoundTag("MFSUpgradeData"));
         readCustomData(nbt);
         needsUpgradeCache = true;
         markDirty();
@@ -486,6 +496,16 @@ public abstract class ControllableDrawerTile extends TileEntity implements ITick
         return utilityUpgrades;
     }
 
+    public MFSUpgradeDataManager getMfsUpgradeData(int slot) {
+        if (slot < 0 || slot >= mfsUpgradeData.length) {
+            return new MFSUpgradeDataManager();
+        }
+        if (mfsUpgradeData[slot] == null) {
+            mfsUpgradeData[slot] = new MFSUpgradeDataManager();
+        }
+        return mfsUpgradeData[slot];
+    }
+
     public DrawerOptions getDrawerOptions() {
         return drawerOptions;
     }
@@ -496,6 +516,36 @@ public abstract class ControllableDrawerTile extends TileEntity implements ITick
 
     public int getUtilityUpgradesAmount() {
         return 3;
+    }
+
+    private NBTTagCompound serializeMfsUpgradeData() {
+        NBTTagCompound tag = new NBTTagCompound();
+        for (int i = 0; i < mfsUpgradeData.length; i++) {
+            if (utilityUpgrades.getStackInSlot(i).getItem() instanceof MFSUpgradeItem && mfsUpgradeData[i] != null) {
+                tag.setTag("Slot" + i, mfsUpgradeData[i].serializeNBT());
+            }
+        }
+        return tag;
+    }
+
+    private void deserializeMfsUpgradeData(NBTTagCompound tag) {
+        for (int i = 0; i < mfsUpgradeData.length; i++) {
+            mfsUpgradeData[i] = null;
+        }
+        for (String key : tag.getKeySet()) {
+            if (!key.startsWith("Slot")) {
+                continue;
+            }
+            try {
+                int slot = Integer.parseInt(key.substring(4));
+                if (slot >= 0 && slot < mfsUpgradeData.length) {
+                    MFSUpgradeDataManager manager = new MFSUpgradeDataManager();
+                    manager.deserializeNBT(tag.getCompoundTag(key));
+                    mfsUpgradeData[slot] = manager;
+                }
+            } catch (NumberFormatException ignored) {
+            }
+        }
     }
 
     public boolean isEverythingEmpty() {
