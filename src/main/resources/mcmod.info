@@ -1,6 +1,6 @@
 [{
-  "modid": "functionalstoragelgeacy",
-  "name": "Functional Storage Lgeacy",
+  "modid": "functionalstoragelegacy",
+  "name": "Functional Storage Legacy",
   "description": "Backport of Functional Storage mod features to Minecraft 1.12.2. Includes MoreFunctionalStorage features.",
   "version": "${version}",
   "mcversion": "${mcversion}",

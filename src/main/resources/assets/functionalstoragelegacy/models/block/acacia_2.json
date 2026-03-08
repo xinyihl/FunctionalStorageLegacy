@@ -1,0 +1,8 @@
+{
+  "parent": "functionalstoragelegacy:block/base_x_2",
+  "textures": {
+    "front": "functionalstoragelegacy:blocks/acacia_front_2",
+    "side": "functionalstoragelegacy:blocks/acacia_side",
+    "top": "blocks/planks_acacia"
+  }
+}

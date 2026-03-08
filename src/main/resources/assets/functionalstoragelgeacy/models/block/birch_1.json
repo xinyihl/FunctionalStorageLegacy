@@ -1,8 +1,0 @@
-{
-  "parent": "functionalstoragelgeacy:block/base_x_1",
-  "textures": {
-    "front": "functionalstoragelgeacy:blocks/birch_front_1",
-    "side": "functionalstoragelgeacy:blocks/birch_side",
-    "top": "blocks/planks_birch"
-  }
-}

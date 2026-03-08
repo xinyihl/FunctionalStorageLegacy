@@ -1,8 +1,0 @@
-{
-  "parent": "block/orientable",
-  "textures": {
-    "front": "functionalstoragelgeacy:blocks/ender_front_1",
-    "side": "functionalstoragelgeacy:blocks/ender_side",
-    "top": "functionalstoragelgeacy:blocks/ender_side"
-  }
-}

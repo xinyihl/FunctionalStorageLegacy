@@ -1,0 +1,8 @@
+{
+  "parent": "block/orientable",
+  "textures": {
+    "front": "functionalstoragelegacy:blocks/ender_front_1",
+    "side": "functionalstoragelegacy:blocks/ender_side",
+    "top": "functionalstoragelegacy:blocks/ender_side"
+  }
+}

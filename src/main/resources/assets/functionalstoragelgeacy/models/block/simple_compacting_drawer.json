@@ -1,8 +1,0 @@
-{
-  "parent": "block/orientable",
-  "textures": {
-    "front": "functionalstoragelgeacy:blocks/simple_compacting_drawer_front",
-    "side": "functionalstoragelgeacy:blocks/machine_side",
-    "top": "functionalstoragelgeacy:blocks/machine_top"
-  }
-}

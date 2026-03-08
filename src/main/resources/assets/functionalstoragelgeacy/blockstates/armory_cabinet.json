@@ -1,8 +1,0 @@
-{
-  "variants": {
-    "facing=north": { "model": "functionalstoragelgeacy:armory_cabinet" },
-    "facing=south": { "model": "functionalstoragelgeacy:armory_cabinet", "y": 180 },
-    "facing=west": { "model": "functionalstoragelgeacy:armory_cabinet", "y": 270 },
-    "facing=east": { "model": "functionalstoragelgeacy:armory_cabinet", "y": 90 }
-  }
-}

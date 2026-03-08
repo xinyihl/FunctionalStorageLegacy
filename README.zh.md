@@ -1,8 +1,9 @@
-# Functional Storage Lgeacy
+# Functional Storage Legacy
 
-`Functional Storage Lgeacy` 是一个面向 `Minecraft 1.12.2` 的高版本 `Functional Storage` 风格回移模组，并整合了部分 `MoreFunctionalStorage` 的思路与内容。
+`Functional Storage Legacy` 是一个面向 `Minecraft 1.12.2` 的高版本 `Functional Storage` 风格回移模组，并整合了部分
+`MoreFunctionalStorage` 的思路与内容。
 
-- Mod ID: `functionalstoragelgeacy`
+- Mod ID: `functionalstoragelegacy`
 - Minecraft: `1.12.2`
 - Java: `8`
 - License: `MIT`

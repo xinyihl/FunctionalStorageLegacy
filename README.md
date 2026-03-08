@@ -1,8 +1,9 @@
-# Functional Storage Lgeacy
+# Functional Storage Legacy
 
-`Functional Storage Lgeacy` is a high-version-style backport for `Minecraft 1.12.2`, inspired by modern `Functional Storage` and partially integrating ideas and content from `MoreFunctionalStorage`.
+`Functional Storage Legacy` is a high-version-style backport for `Minecraft 1.12.2`, inspired by modern
+`Functional Storage` and partially integrating ideas and content from `MoreFunctionalStorage`.
 
-- Mod ID: `functionalstoragelgeacy`
+- Mod ID: `functionalstoragelegacy`
 - Minecraft: `1.12.2`
 - Java: `8`
 - License: `MIT`

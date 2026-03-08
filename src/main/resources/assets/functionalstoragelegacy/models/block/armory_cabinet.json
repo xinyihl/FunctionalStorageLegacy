@@ -1,0 +1,8 @@
+{
+  "parent": "block/orientable",
+  "textures": {
+    "front": "functionalstoragelegacy:blocks/armory_front",
+    "side": "functionalstoragelegacy:blocks/machine_side",
+    "top": "functionalstoragelegacy:blocks/machine_top"
+  }
+}

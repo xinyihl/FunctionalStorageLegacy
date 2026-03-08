@@ -1,0 +1,8 @@
+{
+  "parent": "functionalstoragelegacy:block/base_x_2",
+  "textures": {
+    "front": "functionalstoragelegacy:blocks/jungle_front_2",
+    "side": "functionalstoragelegacy:blocks/jungle_side",
+    "top": "blocks/planks_jungle"
+  }
+}
