@@ -51,4 +51,8 @@ public class WoodDrawerBlock extends DrawerBlock {
     public DrawerType getDrawerType() {
         return drawerType;
     }
+
+    public DrawerWoodType getWoodType() {
+        return woodType;
+    }
 }

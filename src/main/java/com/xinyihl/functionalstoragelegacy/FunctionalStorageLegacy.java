@@ -7,12 +7,14 @@ import com.xinyihl.functionalstoragelegacy.config.FunctionalStorageConfig;
 import com.xinyihl.functionalstoragelegacy.item.*;
 import com.xinyihl.functionalstoragelegacy.network.NetworkHandler;
 import com.xinyihl.functionalstoragelegacy.proxy.CommonProxy;
+import com.xinyihl.functionalstoragelegacy.recipe.FunctionalStorageRecipes;
 import com.xinyihl.functionalstoragelegacy.util.DrawerWoodType;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -239,6 +241,11 @@ public class FunctionalStorageLegacy {
             ItemBlock itemBlock = block instanceof DrawerBlock ? new DrawerItemBlock(block) : new ItemBlock(block);
             itemBlock.setRegistryName(block.getRegistryName());
             return itemBlock;
+        }
+
+        @SubscribeEvent
+        public static void registerRecipes(RegistryEvent.Register<IRecipe> event) {
+            FunctionalStorageRecipes.register(event.getRegistry());
         }
 
         @SubscribeEvent
