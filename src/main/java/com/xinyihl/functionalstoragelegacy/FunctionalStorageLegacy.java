@@ -5,6 +5,7 @@ import com.xinyihl.functionalstoragelegacy.block.tile.ControllableDrawerTile;
 import com.xinyihl.functionalstoragelegacy.compat.top.TheOneProbeCompat;
 import com.xinyihl.functionalstoragelegacy.config.FunctionalStorageConfig;
 import com.xinyihl.functionalstoragelegacy.item.*;
+import com.xinyihl.functionalstoragelegacy.item.GenerationUpgrade.*;
 import com.xinyihl.functionalstoragelegacy.network.NetworkHandler;
 import com.xinyihl.functionalstoragelegacy.proxy.CommonProxy;
 import com.xinyihl.functionalstoragelegacy.recipe.FunctionalStorageRecipes;
@@ -31,6 +32,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.registries.IForgeRegistry;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -80,6 +82,10 @@ public class FunctionalStorageLegacy {
     public static UpgradeItem PULLING_UPGRADE;
     public static UpgradeItem PUSHING_UPGRADE;
     public static UpgradeItem COLLECTOR_UPGRADE;
+    public static StoneGenerationUpgradeItem STONE_GENERATION_UPGRADE_BASIC;
+    public static StoneGenerationUpgradeItem STONE_GENERATION_UPGRADE_ADVANCED;
+    public static StoneGenerationUpgradeItem STONE_GENERATION_UPGRADE_REINFORCED;
+    public static StoneGenerationUpgradeItem STONE_GENERATION_UPGRADE_MAGICAL;
 
     // Tools
     public static ConfigurationToolItem CONFIGURATION_TOOL;
@@ -103,7 +109,6 @@ public class FunctionalStorageLegacy {
     public void postInit(FMLPostInitializationEvent event) {
         proxy.postInit(event);
     }
-
     // ====== Registration ======
     @Mod.EventBusSubscriber(modid = Tags.MOD_ID)
     public static class RegistrationHandler {
@@ -189,6 +194,21 @@ public class FunctionalStorageLegacy {
                     .setCreativeTab(CREATIVE_TAB);
             ((UpgradeItem) CREATIVE_VENDING_UPGRADE).incompatibleWith(CREATIVE_VENDING_UPGRADE);
 
+            STONE_GENERATION_UPGRADE_BASIC = new StoneGenerationUpgradeItem(StoneGenerationUpgradeItem.StoneTier.BASIC);
+            STONE_GENERATION_UPGRADE_BASIC.setRegistryName("stone_generation_upgrade_t1");
+            STONE_GENERATION_UPGRADE_BASIC.setTranslationKey(Tags.MOD_ID + ".stone_generation_upgrade_t1");
+
+            STONE_GENERATION_UPGRADE_ADVANCED = new StoneGenerationUpgradeItem(StoneGenerationUpgradeItem.StoneTier.ADVANCED);
+            STONE_GENERATION_UPGRADE_ADVANCED.setRegistryName("stone_generation_upgrade_t2");
+            STONE_GENERATION_UPGRADE_ADVANCED.setTranslationKey(Tags.MOD_ID + ".stone_generation_upgrade_t2");
+
+            STONE_GENERATION_UPGRADE_REINFORCED = new StoneGenerationUpgradeItem(StoneGenerationUpgradeItem.StoneTier.REINFORCED);
+            STONE_GENERATION_UPGRADE_REINFORCED.setRegistryName("stone_generation_upgrade_t3");
+            STONE_GENERATION_UPGRADE_REINFORCED.setTranslationKey(Tags.MOD_ID + ".stone_generation_upgrade_t3");
+
+            STONE_GENERATION_UPGRADE_MAGICAL = new StoneGenerationUpgradeItem(StoneGenerationUpgradeItem.StoneTier.MAGICAL);
+            STONE_GENERATION_UPGRADE_MAGICAL.setRegistryName("stone_generation_upgrade_t4");
+            STONE_GENERATION_UPGRADE_MAGICAL.setTranslationKey(Tags.MOD_ID + ".stone_generation_upgrade_t4");
             // Utility Upgrades
             VOID_UPGRADE = new UpgradeItem(UpgradeItem.Type.UTILITY, UpgradeItem.UtilityAction.VOID);
             VOID_UPGRADE.setRegistryName("void_upgrade");
@@ -233,7 +253,11 @@ public class FunctionalStorageLegacy {
                     PUSHING_UPGRADE,
                     COLLECTOR_UPGRADE,
                     CONFIGURATION_TOOL,
-                    LINKING_TOOL
+                    LINKING_TOOL,
+                    STONE_GENERATION_UPGRADE_BASIC,
+                    STONE_GENERATION_UPGRADE_ADVANCED,
+                    STONE_GENERATION_UPGRADE_REINFORCED,
+                    STONE_GENERATION_UPGRADE_MAGICAL
             );
         }
 

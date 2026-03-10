@@ -41,6 +41,10 @@ item.functionalstoragelegacy.pulling_upgrade.name=拉取升级
 item.functionalstoragelegacy.pushing_upgrade.name=推送升级
 item.functionalstoragelegacy.redstone_upgrade.name=红石升级
 item.functionalstoragelegacy.void_upgrade.name=虚空升级
+item.functionalstoragelegacy.stone_generation_upgrade_t1.name=圆石生成升级 T1
+item.functionalstoragelegacy.stone_generation_upgrade_t2.name=圆石生成升级 T2
+item.functionalstoragelegacy.stone_generation_upgrade_t3.name=圆石生成升级 T3
+item.functionalstoragelegacy.stone_generation_upgrade_t4.name=圆石生成升级 T4
 
 # Tooltips
 item.functionalstoragelegacy.iron_downgrade.desc=减少抽屉存储容量
@@ -54,6 +58,7 @@ item.functionalstoragelegacy.upgrade.direction.north=北
 item.functionalstoragelegacy.upgrade.direction.south=南
 item.functionalstoragelegacy.upgrade.direction.west=西
 item.functionalstoragelegacy.upgrade.direction.east=东
+item.functionalstoragelegacy.generation_upgrade.rate=生成速率：
 
 linkingtool.controller=控制器：
 linkingtool.controller.configured=已将控制器与工具连接
