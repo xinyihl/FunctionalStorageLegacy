@@ -68,6 +68,10 @@ public class ClientProxy extends CommonProxy {
             registerItemModel(FunctionalStorageLegacy.COLLECTOR_UPGRADE);
             registerItemModel(FunctionalStorageLegacy.CONFIGURATION_TOOL);
             registerItemModel(FunctionalStorageLegacy.LINKING_TOOL);
+            registerItemModel(FunctionalStorageLegacy.STONE_GENERATION_UPGRADE_BASIC);
+            registerItemModel(FunctionalStorageLegacy.STONE_GENERATION_UPGRADE_ADVANCED);
+            registerItemModel(FunctionalStorageLegacy.STONE_GENERATION_UPGRADE_REINFORCED);
+            registerItemModel(FunctionalStorageLegacy.STONE_GENERATION_UPGRADE_MAGICAL);
         }
 
         private static void registerBlockModel(Block block) {

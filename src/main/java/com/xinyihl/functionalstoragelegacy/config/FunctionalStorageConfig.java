@@ -24,6 +24,10 @@ public class FunctionalStorageConfig {
     public static int NETHERITE_MULTIPLIER = 32;
     public static int FLUID_DIVISOR = 2;
     public static int RANGE_DIVISOR = 4;
+    public static float STONE_GENERATION_T1= 2.0f;
+    public static float STONE_GENERATION_T2= 4.0f;
+    public static float STONE_GENERATION_T3= 8.0f;
+    public static float STONE_GENERATION_T4= 16.0f;
     public static boolean ENABLE_TOP_COMPATIBILITY = true;
 
     public static void init(File configFile) {
@@ -47,6 +51,11 @@ public class FunctionalStorageConfig {
         NETHERITE_MULTIPLIER = config.getInt("netheriteMultiplier", "storage", 32, 1, 1024, "Netherite Upgrade storage multiplier");
         FLUID_DIVISOR = config.getInt("fluidDivisor", "storage", 2, 1, 64, "Fluid storage divisor for Storage Upgrades");
         RANGE_DIVISOR = config.getInt("rangeDivisor", "storage", 4, 1, 64, "Range divisor for Storage Upgrades");
+
+        STONE_GENERATION_T1 = config.getFloat("stoneGenerationT1", "generation", 2.0f, 1.0f, Float.MAX_VALUE, "Stone Generation Upgrade T1 generation rate");
+        STONE_GENERATION_T2 = config.getFloat("stoneGenerationT2", "generation", 4.0f, 1.0f, Float.MAX_VALUE, "Stone Generation Upgrade T2 generation rate");
+        STONE_GENERATION_T3 = config.getFloat("stoneGenerationT3", "generation", 8.0f, 1.0f, Float.MAX_VALUE, "Stone Generation Upgrade T3 generation rate");
+        STONE_GENERATION_T4 = config.getFloat("stoneGenerationT4", "generation", 16.0f, 1.0f, Float.MAX_VALUE, "Stone Generation Upgrade T4 generation rate");
 
         if (config.hasChanged()) {
             config.save();
