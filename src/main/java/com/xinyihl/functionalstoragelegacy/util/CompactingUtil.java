@@ -2,12 +2,16 @@ package com.xinyihl.functionalstoragelegacy.util;
 
 import com.xinyihl.functionalstoragelegacy.common.inventory.CompactingInventoryHandler;
 import com.xinyihl.functionalstoragelegacy.common.inventory.base.BigInventoryHandler;
+import com.xinyihl.functionalstoragelegacy.common.tile.base.ControllableDrawerTile;
+import com.xinyihl.functionalstoragelegacy.common.tile.compact.SimpleCompactingDrawerTile;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemHandlerHelper;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -235,6 +239,44 @@ public class CompactingUtil {
             }
         }
         return null;
+    }
+
+    public static boolean ItemRemainder(ControllableDrawerTile tile, IItemHandler handler, ItemStack itemToGenerate) {
+        ItemStack remainder;
+
+        if (tile instanceof SimpleCompactingDrawerTile) {
+            remainder = handler.insertItem(1, itemToGenerate, false);
+            if (!remainder.isEmpty()) {
+                remainder = ItemHandlerHelper.insertItemStacked(handler, itemToGenerate, false);
+            }
+        } else {
+            remainder = ItemHandlerHelper.insertItemStacked(handler, itemToGenerate, false);
+        }
+
+        return remainder.isEmpty();
+    }
+
+    public static boolean CompressionDrawertrEatment(ControllableDrawerTile tile, ItemStack itemToGenerate, CompactingInventoryHandler compactingHandler) {
+        int anchorSlot = compactingHandler.getSlots() - 1;
+        List<CompactingInventoryHandler.Result> results = CompactingUtil.getCompactingResults(
+                tile.getWorld(),
+                itemToGenerate,
+                compactingHandler.getSlots(),
+                anchorSlot
+        );
+
+        if (!results.isEmpty()) {
+            while (results.size() < compactingHandler.getSlots()) {
+                results.add(new CompactingInventoryHandler.Result(ItemStack.EMPTY, 1));
+            }
+            if (results.size() > compactingHandler.getSlots()) {
+                results = results.subList(0, compactingHandler.getSlots());
+            }
+            compactingHandler.setResults(results);
+        } else {
+            return true;
+        }
+        return false;
     }
 
     private static class HigherTier {

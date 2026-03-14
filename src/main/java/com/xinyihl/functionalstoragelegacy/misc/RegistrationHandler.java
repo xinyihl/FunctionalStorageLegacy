@@ -15,12 +15,10 @@ import com.xinyihl.functionalstoragelegacy.common.block.controller.DrawerControl
 import com.xinyihl.functionalstoragelegacy.common.item.ConfigurationToolItem;
 import com.xinyihl.functionalstoragelegacy.common.item.DrawerItemBlock;
 import com.xinyihl.functionalstoragelegacy.common.item.LinkingToolItem;
-import com.xinyihl.functionalstoragelegacy.common.item.upgrade.StoneGenerationUpgradeItem;
-import com.xinyihl.functionalstoragelegacy.common.item.upgrade.StorageUpgradeItem;
-import com.xinyihl.functionalstoragelegacy.common.item.upgrade.UpgradeItem;
-import com.xinyihl.functionalstoragelegacy.common.item.upgrade.UtilityUpgradeItem;
+import com.xinyihl.functionalstoragelegacy.common.item.upgrade.*;
 import com.xinyihl.functionalstoragelegacy.common.recipe.FunctionalStorageRecipes;
 import com.xinyihl.functionalstoragelegacy.common.tile.base.ControllableDrawerTile;
+import com.xinyihl.functionalstoragelegacy.common.item.upgrade.UniversalItemGeneration;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
@@ -84,10 +82,14 @@ public class RegistrationHandler {
     public static UtilityUpgradeItem COLLECTOR_UPGRADE;
     public static UtilityUpgradeItem WIRELESS_PULLING_UPGRADE;
     public static UtilityUpgradeItem WIRELESS_PUSHING_UPGRADE;
-    public static StoneGenerationUpgradeItem STONE_GENERATION_UPGRADE_BASIC;
-    public static StoneGenerationUpgradeItem STONE_GENERATION_UPGRADE_ADVANCED;
-    public static StoneGenerationUpgradeItem STONE_GENERATION_UPGRADE_REINFORCED;
-    public static StoneGenerationUpgradeItem STONE_GENERATION_UPGRADE_MAGICAL;
+    public static StoneGenerationUpgradeItem STONE_GENERATION_UPGRADE_T1;
+    public static StoneGenerationUpgradeItem STONE_GENERATION_UPGRADE_T2;
+    public static StoneGenerationUpgradeItem STONE_GENERATION_UPGRADE_T3;
+    public static StoneGenerationUpgradeItem STONE_GENERATION_UPGRADE_T4;
+    public static UniversalItemGeneration UNIVERSAL_ITEM_GENERATION_T1;
+    public static UniversalItemGeneration UNIVERSAL_ITEM_GENERATION_T2;
+    public static UniversalItemGeneration UNIVERSAL_ITEM_GENERATION_T3;
+    public static UniversalItemGeneration UNIVERSAL_ITEM_GENERATION_T4;
     // Tools
     public static ConfigurationToolItem CONFIGURATION_TOOL;
     public static LinkingToolItem LINKING_TOOL;
@@ -174,21 +176,21 @@ public class RegistrationHandler {
                 .setCreativeTab(CREATIVE_TAB);
         ((UpgradeItem) CREATIVE_VENDING_UPGRADE).incompatibleWith(CREATIVE_VENDING_UPGRADE);
 
-        STONE_GENERATION_UPGRADE_BASIC = new StoneGenerationUpgradeItem(StoneGenerationUpgradeItem.StoneTier.BASIC);
-        STONE_GENERATION_UPGRADE_BASIC.setRegistryName("stone_generation_upgrade_t1");
-        STONE_GENERATION_UPGRADE_BASIC.setTranslationKey(Tags.MOD_ID + ".stone_generation_upgrade_t1");
+        STONE_GENERATION_UPGRADE_T1 = new StoneGenerationUpgradeItem(StoneGenerationUpgradeItem.StoneTier.T1);
+        STONE_GENERATION_UPGRADE_T1.setRegistryName("stone_generation_upgrade_t1");
+        STONE_GENERATION_UPGRADE_T1.setTranslationKey(Tags.MOD_ID + ".stone_generation_upgrade_t1");
 
-        STONE_GENERATION_UPGRADE_ADVANCED = new StoneGenerationUpgradeItem(StoneGenerationUpgradeItem.StoneTier.ADVANCED);
-        STONE_GENERATION_UPGRADE_ADVANCED.setRegistryName("stone_generation_upgrade_t2");
-        STONE_GENERATION_UPGRADE_ADVANCED.setTranslationKey(Tags.MOD_ID + ".stone_generation_upgrade_t2");
+        STONE_GENERATION_UPGRADE_T2 = new StoneGenerationUpgradeItem(StoneGenerationUpgradeItem.StoneTier.T2);
+        STONE_GENERATION_UPGRADE_T2.setRegistryName("stone_generation_upgrade_t2");
+        STONE_GENERATION_UPGRADE_T2.setTranslationKey(Tags.MOD_ID + ".stone_generation_upgrade_t2");
 
-        STONE_GENERATION_UPGRADE_REINFORCED = new StoneGenerationUpgradeItem(StoneGenerationUpgradeItem.StoneTier.REINFORCED);
-        STONE_GENERATION_UPGRADE_REINFORCED.setRegistryName("stone_generation_upgrade_t3");
-        STONE_GENERATION_UPGRADE_REINFORCED.setTranslationKey(Tags.MOD_ID + ".stone_generation_upgrade_t3");
+        STONE_GENERATION_UPGRADE_T3 = new StoneGenerationUpgradeItem(StoneGenerationUpgradeItem.StoneTier.T3);
+        STONE_GENERATION_UPGRADE_T3.setRegistryName("stone_generation_upgrade_t3");
+        STONE_GENERATION_UPGRADE_T3.setTranslationKey(Tags.MOD_ID + ".stone_generation_upgrade_t3");
 
-        STONE_GENERATION_UPGRADE_MAGICAL = new StoneGenerationUpgradeItem(StoneGenerationUpgradeItem.StoneTier.MAGICAL);
-        STONE_GENERATION_UPGRADE_MAGICAL.setRegistryName("stone_generation_upgrade_t4");
-        STONE_GENERATION_UPGRADE_MAGICAL.setTranslationKey(Tags.MOD_ID + ".stone_generation_upgrade_t4");
+        STONE_GENERATION_UPGRADE_T4 = new StoneGenerationUpgradeItem(StoneGenerationUpgradeItem.StoneTier.T4);
+        STONE_GENERATION_UPGRADE_T4.setRegistryName("stone_generation_upgrade_t4");
+        STONE_GENERATION_UPGRADE_T4.setTranslationKey(Tags.MOD_ID + ".stone_generation_upgrade_t4");
         // Utility Upgrades
         VOID_UPGRADE = new UtilityUpgradeItem(UtilityUpgradeItem.UtilityAction.VOID);
         VOID_UPGRADE.setRegistryName("void_upgrade");
@@ -219,6 +221,23 @@ public class RegistrationHandler {
         WIRELESS_PUSHING_UPGRADE.setRegistryName("wireless_pushing_upgrade");
         WIRELESS_PUSHING_UPGRADE.setTranslationKey(Tags.MOD_ID + ".wireless_pushing_upgrade");
 
+        if(Configurations.GENERATION.UNIVERSAL_ITEMS_GENERATION_REGISTERED) {
+            UNIVERSAL_ITEM_GENERATION_T1 = new UniversalItemGeneration(UniversalItemGeneration.GenerationTier.T1);
+            UNIVERSAL_ITEM_GENERATION_T1.setRegistryName("universal_item_generation_T1");
+            UNIVERSAL_ITEM_GENERATION_T1.setTranslationKey(Tags.MOD_ID + ".universal_item_generation_T1");
+
+            UNIVERSAL_ITEM_GENERATION_T2 = new UniversalItemGeneration(UniversalItemGeneration.GenerationTier.T2);
+            UNIVERSAL_ITEM_GENERATION_T2.setRegistryName("universal_item_generation_T2");
+            UNIVERSAL_ITEM_GENERATION_T2.setTranslationKey(Tags.MOD_ID + ".universal_item_generation_T2");
+
+            UNIVERSAL_ITEM_GENERATION_T3 = new UniversalItemGeneration(UniversalItemGeneration.GenerationTier.T3);
+            UNIVERSAL_ITEM_GENERATION_T3.setRegistryName("universal_item_generation_T3");
+            UNIVERSAL_ITEM_GENERATION_T3.setTranslationKey(Tags.MOD_ID + ".universal_item_generation_T3");
+
+            UNIVERSAL_ITEM_GENERATION_T4 = new UniversalItemGeneration(UniversalItemGeneration.GenerationTier.T4);
+            UNIVERSAL_ITEM_GENERATION_T4.setRegistryName("universal_item_generation_T4");
+            UNIVERSAL_ITEM_GENERATION_T4.setTranslationKey(Tags.MOD_ID + ".universal_item_generation_T4");
+        }
         // Tools
         CONFIGURATION_TOOL = new ConfigurationToolItem();
         CONFIGURATION_TOOL.setRegistryName("configuration_tool");
@@ -244,11 +263,18 @@ public class RegistrationHandler {
                 WIRELESS_PUSHING_UPGRADE,
                 CONFIGURATION_TOOL,
                 LINKING_TOOL,
-                STONE_GENERATION_UPGRADE_BASIC,
-                STONE_GENERATION_UPGRADE_ADVANCED,
-                STONE_GENERATION_UPGRADE_REINFORCED,
-                STONE_GENERATION_UPGRADE_MAGICAL
+                STONE_GENERATION_UPGRADE_T1,
+                STONE_GENERATION_UPGRADE_T2,
+                STONE_GENERATION_UPGRADE_T3,
+                STONE_GENERATION_UPGRADE_T4
         );
+        if(Configurations.GENERATION.UNIVERSAL_ITEMS_GENERATION_REGISTERED){
+            event.getRegistry().registerAll(
+                    UNIVERSAL_ITEM_GENERATION_T1,
+                    UNIVERSAL_ITEM_GENERATION_T2,
+                    UNIVERSAL_ITEM_GENERATION_T3,
+                    UNIVERSAL_ITEM_GENERATION_T4);
+        }
     }
 
     private static ItemBlock createItemBlock(Block block) {

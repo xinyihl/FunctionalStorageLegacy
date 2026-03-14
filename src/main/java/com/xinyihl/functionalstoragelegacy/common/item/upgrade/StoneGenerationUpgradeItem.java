@@ -2,10 +2,10 @@ package com.xinyihl.functionalstoragelegacy.common.item.upgrade;
 
 import com.xinyihl.functionalstoragelegacy.common.inventory.CompactingInventoryHandler;
 import com.xinyihl.functionalstoragelegacy.common.tile.base.ControllableDrawerTile;
-import com.xinyihl.functionalstoragelegacy.common.tile.compact.SimpleCompactingDrawerTile;
 import com.xinyihl.functionalstoragelegacy.misc.Configurations;
 import com.xinyihl.functionalstoragelegacy.misc.RegistrationHandler;
 import com.xinyihl.functionalstoragelegacy.util.CompactingUtil;
+import com.xinyihl.functionalstoragelegacy.util.TimerUtil;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.init.Blocks;
@@ -16,7 +16,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemHandlerHelper;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -24,7 +23,6 @@ import java.util.List;
 public class StoneGenerationUpgradeItem extends UtilityUpgradeItem {
 
     private final StoneTier tier;
-    private static final String TIMER_KEY = "StoneGenTimer";
 
     public StoneGenerationUpgradeItem(StoneTier tier) {
         super(UtilityAction.NONE);
@@ -35,6 +33,7 @@ public class StoneGenerationUpgradeItem extends UtilityUpgradeItem {
 
     @Override
     public void onTick(ControllableDrawerTile tile, ItemStack upgradeStack, int upgradeSlot) {
+
         if (tile.getWorld().isRemote) {
             return;
         }
@@ -44,73 +43,32 @@ public class StoneGenerationUpgradeItem extends UtilityUpgradeItem {
         }
         NBTTagCompound nbt = upgradeStack.getTagCompound();
 
-        if (!nbt.hasKey(TIMER_KEY)) {
-            nbt.setInteger(TIMER_KEY, getGenerationInterval());
-        }
-
-        int timer = nbt.getInteger(TIMER_KEY);
-        timer--;
-        nbt.setInteger(TIMER_KEY, timer);
-
-        if (timer <= 0) {
-            if (generateAndStoreStone(tile)) {
-                nbt.setInteger(TIMER_KEY, getGenerationInterval());
-            } else {
-                nbt.setInteger(TIMER_KEY, 100);
-            }
-        }
+        TimerUtil.updateAndExecute(nbt, getGenerationInterval(), () -> GenerationTreatment(tile));
     }
 
     private int getGenerationInterval() {
         return (int) Math.ceil(20.0 / tier.getGenerationRate());
     }
 
-    private boolean generateAndStoreStone(ControllableDrawerTile tile) {
+
+    public static boolean GenerationTreatment(ControllableDrawerTile tile) {
         IItemHandler handler = tile.getItemHandler();
-        if (handler == null) return false;
-
-        if (handler instanceof CompactingInventoryHandler) {
-            CompactingInventoryHandler compactingHandler = (CompactingInventoryHandler) handler;
-
-            if (!compactingHandler.isSetup()) {
-                ItemStack stoneStack = new ItemStack(Blocks.COBBLESTONE, 1);
-                int anchorSlot = compactingHandler.getSlots() - 1;
-                List<CompactingInventoryHandler.Result> results = CompactingUtil.getCompactingResults(
-                        tile.getWorld(),
-                        stoneStack,
-                        compactingHandler.getSlots(),
-                        anchorSlot
-                );
-
-                if (!results.isEmpty()) {
-
-                    while (results.size() < compactingHandler.getSlots()) {
-                        results.add(new CompactingInventoryHandler.Result(ItemStack.EMPTY, 1));
+        if (handler == null) {
+            return false;
+        } else {
+            if (handler instanceof CompactingInventoryHandler) {
+                CompactingInventoryHandler compactingHandler = (CompactingInventoryHandler) handler;
+                if (!compactingHandler.isSetup()) {
+                    ItemStack stoneStack = new ItemStack(Blocks.COBBLESTONE, 1);
+                    if (CompactingUtil.CompressionDrawertrEatment(tile, stoneStack, compactingHandler)) {
+                        return false;
                     }
-
-                    if (results.size() > compactingHandler.getSlots()) {
-                        results = results.subList(0, compactingHandler.getSlots());
-                    }
-                    compactingHandler.setResults(results);
-                } else {
-                    return false;
                 }
             }
+
+            ItemStack stoneStack = new ItemStack(Blocks.COBBLESTONE, 1);
+            return CompactingUtil.ItemRemainder(tile, handler, stoneStack);
         }
-
-        ItemStack stoneStack = new ItemStack(Blocks.COBBLESTONE, 1);
-        ItemStack remainder;
-
-        if (tile instanceof SimpleCompactingDrawerTile) {
-            remainder = handler.insertItem(1, stoneStack, false);
-            if (!remainder.isEmpty()) {
-                remainder = ItemHandlerHelper.insertItemStacked(handler, stoneStack, false);
-            }
-        } else {
-            remainder = ItemHandlerHelper.insertItemStacked(handler, stoneStack, false);
-        }
-
-        return remainder.isEmpty();
     }
 
     @SideOnly(Side.CLIENT)
@@ -124,10 +82,10 @@ public class StoneGenerationUpgradeItem extends UtilityUpgradeItem {
     }
 
     public enum StoneTier {
-        BASIC(1),
-        ADVANCED(2),
-        REINFORCED(3),
-        MAGICAL(4);
+        T1(1),
+        T2(2),
+        T3(3),
+        T4(4);
 
         private final int tier;
 
@@ -137,13 +95,13 @@ public class StoneGenerationUpgradeItem extends UtilityUpgradeItem {
 
         public float getGenerationRate() {
             switch (this) {
-                case ADVANCED:
+                case T2:
                     return Configurations.GENERATION.stoneGenerationT2;
-                case REINFORCED:
+                case T3:
                     return Configurations.GENERATION.stoneGenerationT3;
-                case MAGICAL:
+                case T4:
                     return Configurations.GENERATION.stoneGenerationT4;
-                case BASIC:
+                case T1:
                 default:
                     return Configurations.GENERATION.stoneGenerationT1;
             }

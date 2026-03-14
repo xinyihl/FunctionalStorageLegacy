@@ -43,6 +43,10 @@ item.functionalstoragelegacy.stone_generation_upgrade_t1.name=Stone Generation U
 item.functionalstoragelegacy.stone_generation_upgrade_t2.name=Stone Generation Upgrade T2
 item.functionalstoragelegacy.stone_generation_upgrade_t3.name=Stone Generation Upgrade T3
 item.functionalstoragelegacy.stone_generation_upgrade_t4.name=Stone Generation Upgrade T4
+item.functionalstoragelegacy.universal_item_generation_T1.name=Universal Item Generation Upgrade T1
+item.functionalstoragelegacy.universal_item_generation_T2.name=Universal Item Generation Upgrade T2
+item.functionalstoragelegacy.universal_item_generation_T3.name=Universal Item Generation Upgrade T3
+item.functionalstoragelegacy.universal_item_generation_T4.name=Universal Item Generation Upgrade T4
 
 # Utility Upgrades
 item.functionalstoragelegacy.void_upgrade.name=Void Upgrade
@@ -77,6 +81,9 @@ item.functionalstoragelegacy.upgrade.wireless.no_target=No wireless target bound
 item.functionalstoragelegacy.upgrade.wireless.bound=Bound %s: %s (%s, %s, %s)
 item.functionalstoragelegacy.upgrade.wireless.cleared=Wireless target cleared.
 item.functionalstoragelegacy.generation_upgrade.rate=Generation Rate:
+item.functionalstoragelegacy.universal_generation_upgrade.rate=Generation Rate:
+item.functionalstoragelegacy.universal_generation_upgrade.target=Target:
+item.functionalstoragelegacy.universal_generation_upgrade.no_target=No valid target configured (check config)
 
 # Linking Tool Messages
 linkingtool.controller.configured=Controller position saved!

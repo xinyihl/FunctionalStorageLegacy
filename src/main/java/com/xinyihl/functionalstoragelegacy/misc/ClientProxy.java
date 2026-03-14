@@ -74,10 +74,17 @@ public class ClientProxy extends CommonProxy {
             registerItemModel(RegistrationHandler.WIRELESS_PUSHING_UPGRADE);
             registerItemModel(RegistrationHandler.CONFIGURATION_TOOL);
             registerItemModel(RegistrationHandler.LINKING_TOOL);
-            registerItemModel(RegistrationHandler.STONE_GENERATION_UPGRADE_BASIC);
-            registerItemModel(RegistrationHandler.STONE_GENERATION_UPGRADE_ADVANCED);
-            registerItemModel(RegistrationHandler.STONE_GENERATION_UPGRADE_REINFORCED);
-            registerItemModel(RegistrationHandler.STONE_GENERATION_UPGRADE_MAGICAL);
+            registerItemModel(RegistrationHandler.STONE_GENERATION_UPGRADE_T1);
+            registerItemModel(RegistrationHandler.STONE_GENERATION_UPGRADE_T2);
+            registerItemModel(RegistrationHandler.STONE_GENERATION_UPGRADE_T3);
+            registerItemModel(RegistrationHandler.STONE_GENERATION_UPGRADE_T4);
+
+            if(Configurations.GENERATION.UNIVERSAL_ITEMS_GENERATION_REGISTERED) {
+                registerItemModel(RegistrationHandler.UNIVERSAL_ITEM_GENERATION_T1);
+                registerItemModel(RegistrationHandler.UNIVERSAL_ITEM_GENERATION_T2);
+                registerItemModel(RegistrationHandler.UNIVERSAL_ITEM_GENERATION_T3);
+                registerItemModel(RegistrationHandler.UNIVERSAL_ITEM_GENERATION_T4);
+            }
         }
 
         private static void registerBlockModel(Block block) {
