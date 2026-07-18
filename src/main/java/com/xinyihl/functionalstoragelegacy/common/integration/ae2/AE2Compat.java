@@ -13,7 +13,7 @@ public class AE2Compat {
     public static boolean isLoaded() {
         if (!checked) {
             checked = true;
-            loaded = Configurations.COMPATIBILITY.enableAE2Compatibility && Loader.isModLoaded("appliedenergistics2");
+            loaded = Configurations.COMPATIBILITY.enableAE2Compatibility && Loader.isModLoaded("ae2");
         }
         return loaded;
     }

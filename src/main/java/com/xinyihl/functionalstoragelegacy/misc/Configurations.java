@@ -88,7 +88,7 @@ public final class Configurations {
         public boolean enableTOPCompatibility = true;
 
         @Config.Name("enableAE2Compatibility")
-        @Config.Comment("Enable AE2 Extended Life storage bus compatibility for drawers and controllers")
+        @Config.Comment("Enable Applied Energistics 2 - Supergiant storage bus compatibility for drawers and controllers")
         public boolean enableAE2Compatibility = true;
     }
 
