@@ -15,20 +15,20 @@ import com.xinyihl.functionalstoragelegacy.api.storage.TransferResult;
 import net.minecraft.init.Bootstrap;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class DrawerMEStorageTest {
 
-    @BeforeClass
+    @BeforeAll
     public static void bootstrapMinecraft() {
         Bootstrap.register();
     }
@@ -90,7 +90,7 @@ public class DrawerMEStorageTest {
         listener.valid = false;
         storage.insert(key, 1L, Actionable.MODULATE, null);
         assertEquals(2, listener.deltas.size());
-        assertTrue(!storage.isClosed());
+        assertFalse(storage.isClosed());
     }
 
     private static final class RecordingListener implements MEStorageChangeListener {

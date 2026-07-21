@@ -4,15 +4,15 @@ import com.xinyihl.functionalstoragelegacy.common.block.DrawerWoodType;
 import com.xinyihl.functionalstoragelegacy.common.tile.WoodDrawerTile;
 import net.minecraft.init.Bootstrap;
 import net.minecraft.nbt.NBTTagCompound;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class DrawerLayoutNbtTest {
 
-    @BeforeClass
+    @BeforeAll
     public static void bootstrapMinecraft() {
         Bootstrap.register();
     }

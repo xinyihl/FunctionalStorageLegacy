@@ -2,8 +2,8 @@
   "modid": "functionalstoragelegacy",
   "name": "Functional Storage Legacy",
   "description": "Backport of Functional Storage mod features to Minecraft 1.12.2. Includes MoreFunctionalStorage features.",
-  "version": "${version}",
-  "mcversion": "${mcversion}",
+  "version": "${mod_version}",
+  "mcversion": "1.12.2",
   "authorList": ["xinyihl", "Buuz135", "Matyrobbrt"],
   "credits": "Original mod by Buuz135, MoreFunctionalStorage by Matyrobbrt"
 }]

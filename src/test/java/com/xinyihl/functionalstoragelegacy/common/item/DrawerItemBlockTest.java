@@ -3,7 +3,6 @@ package com.xinyihl.functionalstoragelegacy.common.item;
 import com.xinyihl.functionalstoragelegacy.TestCapabilities;
 import com.xinyihl.functionalstoragelegacy.api.storage.BigFluidStack;
 import com.xinyihl.functionalstoragelegacy.api.storage.BigItemStack;
-import com.xinyihl.functionalstoragelegacy.api.storage.IBigItemHandler;
 import com.xinyihl.functionalstoragelegacy.api.storage.StorageAction;
 import com.xinyihl.functionalstoragelegacy.common.block.DrawerWoodType;
 import com.xinyihl.functionalstoragelegacy.common.block.WoodDrawerBlock;
@@ -25,24 +24,24 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.registries.ForgeRegistry;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class DrawerItemBlockTest {
 
     private static final AtomicInteger NEXT_ITEM_ID = new AtomicInteger(29000);
 
-    @BeforeClass
+    @BeforeAll
     public static void bootstrapCapabilities() {
         Bootstrap.register();
         TestCapabilities.itemHandler();
