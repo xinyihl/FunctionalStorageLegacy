@@ -9,19 +9,19 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.ForgeRegistry;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ConfigurableStorageRulesTest {
 
     private static final AtomicInteger NEXT_ITEM_ID = new AtomicInteger(32000);
 
-    @BeforeClass
+    @BeforeAll
     public static void bootstrapMinecraft() {
         Bootstrap.register();
     }

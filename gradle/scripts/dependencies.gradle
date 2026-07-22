@@ -1,0 +1,34 @@
+apply from: 'gradle/scripts/helpers.gradle'
+
+repositories {
+    // Other repositories described by default:
+    // CleanroomMC: https://maven.cleanroommc.com
+    maven {
+        name = 'CurseMaven'
+        url = 'https://cursemaven.com'
+    }
+    maven {
+        name = 'CleanroomCurseMaven'
+        url = 'https://curse.cleanroommc.com'
+    }
+    maven {
+        name = 'Modrinth'
+        url = 'https://api.modrinth.com/maven'
+    }
+    mavenCentral()
+    maven {
+        name = 'Jitpack'
+        url = 'https://jitpack.io'
+    }
+    mavenLocal() // Must be last for caching to work
+}
+
+dependencies {
+    compileOnly "com.cleanroommc:sponge-mixin:0.20.12+mixin.0.8.7"
+    if (propertyBool('enable_lwjglx')) {
+        compileOnly "com.cleanroommc:lwjglx:1.0.0"
+    }
+
+    modImplementation "curse.maven:theoneprobe-245211:2667280"
+    modImplementation "com.github.FormlessDragon:Applied-Energistics-2-Supergiant:v${ae2_version}:dev"
+}
